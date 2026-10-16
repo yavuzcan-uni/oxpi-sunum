@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>OXPI Yapay Zekâlı Çocuk Yazıcısı · Konuşan, Çizen, Etiket Basan Eğitici Oyuncak | Örnek</title>
+<meta name="description" content="Çocuğun söyler, OXPI çizer ve saniyeler içinde yapışkanlı etikete basar. Türkçe konuşur, soruları cevaplar. Mürekkep yok. Ücretsiz kargo, 14 gün ücretsiz iade, kapıda ödeme.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/ortak.css">
+<!--
+  SUNUM NOTU: Yorumlar, soru-cevaplar, puan (4,9), sayılar (1.248 / 312 / 86), fiyat (2.499 TL) ve
+  "aynı gün kargo" saati ÖRNEKTİR. Yayın öncesi gerçek verilerle değiştirilmelidir.
+-->
+<style>
+/* ================= ÜRÜN SAYFASI ================= */
+.crumb{font:600 13.5px var(--f-ui);color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.crumb a:hover{color:var(--ink);text-decoration:underline}
+.pdp{padding:28px 0 70px}
+.pdp-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:56px;align-items:start}
+
+/* galeri */
+.pg{position:sticky;top:92px;display:grid;grid-template-columns:76px minmax(0,1fr);gap:14px}
+.pg-thumbs{display:flex;flex-direction:column;gap:8px;max-height:640px;overflow-y:auto;scrollbar-width:none;padding:2px}
+.pg-thumbs::-webkit-scrollbar{display:none}
+.pg-thumbs button{position:relative;flex:none;width:72px;height:72px;border-radius:14px;border:2px solid var(--line);overflow:hidden;background:#fff;transition:border-color .15s,transform .15s}
+.pg-thumbs button img{width:100%;height:100%;object-fit:cover}
+.pg-thumbs button.act{border-color:var(--ink);box-shadow:3px 3px 0 var(--ink);transform:translateX(3px)}
+.pg-thumbs .play::after{content:"▶";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:20px;background:rgba(22,22,29,.35)}
+.pg-thumbs .ugc::after{content:"📷";position:absolute;right:4px;bottom:3px;font-size:13px}
+.pg-main{position:relative;aspect-ratio:1/1;max-height:640px;border-radius:26px;border:2px solid var(--ink);background:#fff;overflow:hidden;box-shadow:var(--sh);cursor:zoom-in}
+.pg-main img,.pg-main video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .25s,transform .2s}
+.pg-main video{object-fit:cover;background:#111;display:none;cursor:default}
+.pg-main.is-video video{display:block}
+.pg-main.is-video img{display:none}
+.pg-main.zoom img{transform:scale(2)}
+.pg-badges{position:absolute;left:16px;top:16px;z-index:2;display:flex;flex-direction:column;gap:8px;align-items:flex-start;pointer-events:none}
+.pg-badges span{background:#fff;border:2px solid var(--ink);border-radius:11px;padding:4px 11px;font:800 13.5px var(--f-ui)}
+.pg-badges span.y{background:var(--yellow);transform:rotate(-3deg)}
+.pg-cap{position:absolute;right:14px;bottom:14px;z-index:2;background:rgba(255,255,255,.94);border:2px solid var(--ink);border-radius:10px;padding:3px 10px;font:700 12.5px var(--f-ui)}
+.pg-swipe{display:none}
+
+/* satın alma kutusu */
+.bb-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tag{height:30px;padding:0 11px;border-radius:9px;border:1.5px solid var(--ink);display:inline-flex;align-items:center;gap:6px;font:700 13px var(--f-ui);background:#fff}
+.tag.new{background:var(--blue);color:#fff;border-color:var(--blue)}
+.bb h1{font-family:var(--f-display);font-weight:800;font-size:clamp(34px,3.2vw,46px);line-height:1;letter-spacing:-.01em}
+.bb-sub{color:var(--muted);font-size:18px;margin-top:10px}
+.bb-rate{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;font:600 14.5px var(--f-ui);color:var(--muted)}
+.bb-rate b{color:var(--ink)}
+.bb-rate a{text-decoration:underline;text-underline-offset:3px}
+.bb-points{list-style:none;display:grid;gap:9px;margin:20px 0 4px}
+.bb-points li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;font-size:16.5px;line-height:1.4}
+.bb-points li span{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:16px;border:1.5px solid var(--ink)}
+.bb-price{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:22px;padding-top:20px;border-top:2px dashed #D9D2C2}
+.bb-price b{font-family:var(--f-display);font-weight:800;font-size:46px;line-height:1}
+.bb-price s{color:var(--muted);font-size:19px}
+.bb-price .off{background:var(--pink-l);color:#B3264E;border:2px solid #B3264E;border-radius:10px;padding:2px 10px;font:800 13.5px var(--f-ui)}
+.bb-incl{font:600 14px var(--f-ui);color:#1C8C4B;margin-top:6px}
+.bb-pay{display:flex;gap:8px 18px;flex-wrap:wrap;margin-top:10px;font:600 14.5px var(--f-ui);color:var(--ink-2)}
+.bb-pay details{position:relative}
+.bb-pay summary{list-style:none;cursor:pointer;text-decoration:underline;text-underline-offset:3px;color:var(--blue-d)}
+.bb-pay summary::-webkit-details-marker{display:none}
+.inst{position:absolute;z-index:20;top:28px;left:0;width:300px;background:#fff;border:2px solid var(--ink);border-radius:16px;box-shadow:var(--sh);padding:14px 16px;font:600 14px var(--f-ui)}
+.inst div{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--line)}
+.inst div:last-of-type{border-bottom:0}
+.inst small{display:block;margin-top:8px;color:var(--muted);font-size:12px}
+.lbl{display:flex;justify-content:space-between;align-items:baseline;font:700 15px var(--f-ui);margin:22px 0 10px}
+.lbl em{font-style:normal;color:var(--muted);font-weight:600}
+.sw{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sw button{border:2px solid var(--line);border-radius:16px;background:#fff;padding:8px 6px 10px;display:flex;flex-direction:column;align-items:center;gap:4px;font:700 14.5px var(--f-ui);transition:all .2s}
+.sw button img{height:58px;width:auto;transition:transform .45s cubic-bezier(.3,1.8,.5,1)}
+.sw button.act{border-color:var(--ink);box-shadow:4px 4px 0 var(--ink);background:var(--c)}
+.sw button.act img{transform:translateY(-5px) rotate(-5deg)}
+.ship{margin-top:18px;border:2px solid var(--ink);border-radius:16px;background:#fff;overflow:hidden}
+.ship>div{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;padding:11px 14px;font:600 14.5px/1.35 var(--f-ui)}
+.ship>div+div{border-top:1.5px dashed var(--line)}
+.ship>div>span{font-size:19px;text-align:center}
+.ship b{font-weight:800}
+.ship .cut{color:var(--orange-d)}
+.buyrow{display:grid;grid-template-columns:auto 1fr;gap:10px;margin-top:16px}
+.qty{display:flex;align-items:center;height:62px;border:2px solid var(--ink);border-radius:16px;background:#fff;overflow:hidden}
+.qty button{width:42px;height:100%;font:800 20px var(--f-ui)}
+.qty button:hover{background:var(--paper-2)}
+.qty output{width:28px;text-align:center;font:800 18px var(--f-ui)}
+.buyrow .btn{height:62px;font-size:19px}
+.btn-k{--bg:var(--ink);--fg:#fff}
+.now{width:100%;margin-top:10px;height:54px}
+.giftbox{margin-top:14px;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:12px 14px}
+.giftbox label{display:flex;gap:10px;align-items:center;font:700 15px var(--f-ui);cursor:pointer}
+.giftbox input[type=checkbox]{width:20px;height:20px;accent-color:var(--orange)}
+.giftbox label em{margin-left:auto;font-style:normal;color:#1C8C4B;font-weight:800;font-size:14px}
+.giftbox textarea{display:none;width:100%;margin-top:10px;border:2px solid var(--line);border-radius:12px;padding:10px 12px;font:600 15px var(--f-hand);font-size:20px;resize:none;height:76px;outline:none;background:var(--paper)}
+.giftbox.on textarea{display:block}
+.giftbox textarea:focus{border-color:var(--ink)}
+.giftbox p{display:none;font:600 12.5px var(--f-ui);color:var(--muted);margin-top:6px}
+.giftbox.on p{display:block}
+.trust{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.trust div{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:14px;background:var(--paper-2);font:600 13.5px/1.25 var(--f-ui)}
+.trust div span{font-size:20px}
+.trust b{display:block;font-weight:800;font-size:14px}
+.wa-line{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;font:700 14.5px var(--f-ui);color:#128C4A}
+.wa-line:hover{text-decoration:underline}
+
+/* yapışkan alt-menü + fiyat */
+.subnav{position:sticky;top:64px;z-index:90;background:rgba(255,252,245,.95);backdrop-filter:blur(10px);border-bottom:2px solid var(--ink)}
+.subnav .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:60px}
+.subnav nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.subnav nav::-webkit-scrollbar{display:none}
+.subnav nav a{flex:none;padding:8px 13px;border-radius:11px;font:700 14.5px var(--f-ui);color:var(--muted);transition:all .15s}
+.subnav nav a:hover{color:var(--ink);background:var(--paper-2)}
+.subnav nav a.act{color:var(--ink);background:var(--yellow-l);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.sn-buy{display:flex;align-items:center;gap:14px;opacity:0;transform:translateX(20px);pointer-events:none;transition:all .3s;flex:none}
+.sn-buy.on{opacity:1;transform:none;pointer-events:auto}
+.sn-buy img{width:44px;height:44px;object-fit:contain}
+.sn-buy .t{font:700 13px/1.15 var(--f-ui);color:var(--muted)}
+.sn-buy .t b{display:block;font:800 21px var(--f-display);color:var(--ink)}
+.sn-buy .btn{height:44px;font-size:15.5px;box-shadow:3px 3px 0 var(--ink)}
+
+/* ortak bölüm başlığı */
+.sec{padding:90px 0;scroll-margin-top:120px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:34px}
+.sec-head .lead{max-width:440px}
+
+/* nasıl çalışır (kompakt) */
+.flow{display:grid;grid-template-columns:330px minmax(0,1fr);gap:60px;align-items:center}
+.flow .vcard{position:relative;width:100%;aspect-ratio:9/16;transform:rotate(-2deg)}
+.flow-steps{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+.fs{padding:20px;border-radius:20px;border:2px solid var(--ink);background:#fff;box-shadow:4px 4px 0 var(--ink)}
+.fs i{font-style:normal;width:46px;height:46px;border-radius:14px;border:2px solid var(--ink);display:grid;place-items:center;font-size:22px;background:var(--c)}
+.fs h3{font:800 23px/1.05 var(--f-display);margin:14px 0 4px}
+.fs p{color:var(--muted);font-size:15.5px}
+.flow-note{margin-top:22px;font:700 24px/1.15 var(--f-hand);color:var(--muted)}
+
+/* neler yapabilir */
+.cap-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.capc{border-radius:22px;border:2px solid var(--ink);background:#fff;box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column}
+.capc .v{position:relative;aspect-ratio:16/10;background:var(--c);border-bottom:2px solid var(--ink);overflow:hidden}
+.capc .v video{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+.capc .v .snd{right:10px;bottom:10px;height:32px;font-size:12.5px}
+.capc .b{padding:16px 18px 18px}
+.capc h3{font:800 22px/1.05 var(--f-display);display:flex;align-items:center;gap:8px}
+.capc .q{margin-top:10px;display:grid;gap:6px}
+.capc .q p{font:600 14.5px/1.3 var(--f-ui);padding:7px 11px;border-radius:13px;max-width:94%}
+.capc .q .k{justify-self:end;background:var(--blue);color:#fff;border-radius:13px 13px 4px 13px}
+.capc .q .o{justify-self:start;background:var(--paper-2);border:1.5px solid var(--line);border-radius:13px 13px 13px 4px}
+
+/* ebeveyn rehberi */
+.guide{background:var(--night);color:#fff;position:relative;overflow:hidden}
+.guide::before{content:"";position:absolute;width:700px;height:700px;left:-200px;top:-260px;border-radius:50%;background:radial-gradient(closest-side,rgba(20,98,255,.35),transparent)}
+.guide .wrap{position:relative}
+.guide .h-l{color:#fff}
+.guide .lead{color:#C8CBE3}
+.g-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.gq{border-radius:22px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.18);padding:22px}
+.gq .ic{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;font-size:24px;background:var(--c);border:2px solid #fff}
+.gq h3{font:800 21px/1.1 var(--f-display);margin:16px 0 8px}
+.gq p{color:#C8CBE3;font-size:15.5px}
+.gq b{color:#fff}
+.g-foot{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.g-foot span{height:40px;padding:0 15px;border-radius:99px;border:1.5px solid rgba(255,255,255,.3);display:flex;align-items:center;gap:8px;font:600 14.5px var(--f-ui);color:#E9EBFA}
+
+/* kimin için + hediye */
+.ages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.age{border-radius:22px;border:2px solid var(--ink);background:var(--c);padding:22px;position:relative;overflow:hidden;box-shadow:var(--sh)}
+.age b{font:800 40px/1 var(--f-display);display:block}
+.age b small{font-size:20px}
+.age h3{font:800 20px/1.1 var(--f-display);margin:10px 0 8px}
+.age ul{list-style:none;display:grid;gap:6px;font-size:15.5px}
+.age ul li::before{content:"✓ ";font-weight:900}
+.age img{position:absolute;right:-14px;bottom:-16px;width:118px;opacity:.95;transform:rotate(-10deg);background:#fff;border:2px solid var(--ink);border-radius:12px;padding:5px}
+.giftbar{margin-top:22px;border-radius:24px;border:2px solid var(--ink);background:#fff;padding:22px 26px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;align-items:center;box-shadow:var(--sh)}
+.giftbar .ic{font-size:44px}
+.giftbar h3{font:800 24px/1.1 var(--f-display)}
+.giftbar p{color:var(--muted);font-size:15.5px;margin-top:4px}
+.giftbar .chips2{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.giftbar .chips2 button{height:36px;padding:0 13px;border-radius:99px;border:1.5px solid var(--ink);background:var(--paper);font:700 13.5px var(--f-ui);transition:background .15s}
+.giftbar .chips2 button:hover{background:var(--yellow-l)}
+
+/* karşılaştırma */
+.cmp-wrap{overflow-x:auto;border-radius:24px;border:2px solid var(--ink);box-shadow:var(--sh);background:#fff}
+.cmp{width:100%;border-collapse:collapse;min-width:820px}
+.cmp th,.cmp td{padding:15px 16px;text-align:center;border-bottom:1.5px solid var(--line);font:600 15px/1.3 var(--f-ui)}
+.cmp th{font:800 17px/1.15 var(--f-display);vertical-align:bottom;padding-top:20px}
+.cmp th small{display:block;font:600 12px var(--f-ui);color:var(--muted);margin-top:3px}
+.cmp td:first-child,.cmp th:first-child{text-align:left;font-weight:700;width:30%}
+.cmp tr:last-child td{border-bottom:0}
+.cmp .us{background:var(--yellow-l)}
+.cmp th.us{background:var(--yellow);border-left:2px solid var(--ink);border-right:2px solid var(--ink)}
+.cmp td.us{border-left:2px solid var(--ink);border-right:2px solid var(--ink);font-weight:800}
+.y{color:#1C8C4B;font-weight:900}.n{color:#C4344F;font-weight:900}.m{color:var(--muted)}
+.cmp-swipe{display:none}
+.cmp-note{margin-top:14px;font:600 13.5px var(--f-ui);color:var(--muted)}
+
+/* özellikler */
+.spec-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px;align-items:start}
+.inbox{border-radius:24px;border:2px solid var(--ink);background:#fff;overflow:hidden;box-shadow:var(--sh)}
+.inbox img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 72%}
+.inbox ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--ink)}
+.inbox li{display:flex;gap:10px;align-items:center;padding:14px 16px;font:700 15px var(--f-ui)}
+.inbox li:nth-child(odd){border-right:1.5px dashed var(--line)}
+.inbox li:nth-child(-n+2){border-bottom:1.5px dashed var(--line)}
+.inbox li span{font-size:24px}
+.spec{border-radius:24px;border:2px solid var(--ink);background:#fff;overflow:hidden}
+.spec details{border-bottom:1.5px solid var(--line)}
+.spec details:last-child{border-bottom:0}
+.spec summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px 20px;font:800 16px var(--f-ui)}
+.spec summary::-webkit-details-marker{display:none}
+.spec summary::after{content:"+";font:800 20px var(--f-ui);transition:transform .25s}
+.spec details[open] summary::after{transform:rotate(45deg)}
+.spec dl{display:grid;grid-template-columns:42% 58%;padding:0 20px 14px}
+.spec dt,.spec dd{padding:9px 0;border-top:1px dashed var(--line);font-size:15px}
+.spec dt{color:var(--muted);font-weight:600}
+.spec dd{font-weight:700}
+.scale{margin-top:16px;display:flex;gap:14px;align-items:center;padding:14px 18px;border-radius:18px;background:var(--sky);font:600 15px/1.35 var(--f-ui)}
+.scale span{font-size:28px}
+
+/* yorumlar */
+.rv-top{display:grid;grid-template-columns:340px minmax(0,1fr);gap:40px;align-items:start}
+.rsum{position:sticky;top:140px;border-radius:24px;border:2px solid var(--ink);background:#fff;padding:24px;box-shadow:var(--sh)}
+.rsum .big{display:flex;align-items:flex-end;gap:12px}
+.rsum .big b{font:800 64px/.85 var(--f-display)}
+.rsum .big div{font:600 13.5px var(--f-ui);color:var(--muted)}
+.dist{display:grid;gap:6px;margin-top:18px}
+.dist button{display:grid;grid-template-columns:34px 1fr 42px;gap:10px;align-items:center;font:700 13px var(--f-ui);color:var(--muted);padding:3px 4px;border-radius:8px;text-align:left}
+.dist button:hover,.dist button.act{background:var(--paper-2);color:var(--ink)}
+.dist i{height:9px;border-radius:5px;background:var(--line);position:relative;overflow:hidden}
+.dist i::after{content:"";position:absolute;inset:0;width:var(--w);background:var(--yellow)}
+.rsum .rec{margin-top:18px;padding-top:16px;border-top:2px dashed var(--line);font:700 15px/1.35 var(--f-ui)}
+.rsum .rec b{color:#1C8C4B;font-size:22px;display:block}
+.rsum .btn{width:100%;margin-top:16px;height:50px;font-size:16px}
+.topics{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.topics span{height:34px;padding:0 12px;border-radius:99px;background:#fff;border:1.5px solid var(--line);display:flex;align-items:center;gap:6px;font:700 13.5px var(--f-ui)}
+.topics span.neg{background:#FFF1F3;border-color:#F4C5CF}
+.topics small{color:var(--muted);font-weight:600}
+.rfilters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.rfilters button{height:38px;padding:0 14px;border-radius:12px;border:2px solid var(--ink);background:#fff;font:700 14px var(--f-ui);transition:all .15s}
+.rfilters button.act{background:var(--ink);color:#fff}
+.rfilters select{margin-left:auto;height:38px;border-radius:12px;border:2px solid var(--ink);padding:0 10px;font:700 14px var(--f-ui);background:#fff}
+.rlist{display:grid;gap:16px}
+.rcard{border-radius:20px;border:2px solid var(--ink);background:#fff;padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 20px}
+.rcard[hidden],.rcard.later{display:none}
+.rlist.all .rcard.later:not([hidden]){display:grid}
+.rcard .who{display:flex;gap:12px;align-items:center}
+.rcard .av{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--ink);display:grid;place-items:center;font:800 17px var(--f-ui);color:#fff;flex:none}
+.rcard .who b{font:700 16px var(--f-ui);display:block}
+.rcard .who small{font:600 13px var(--f-ui);color:var(--muted)}
+.rcard .stars{font-size:16px;align-self:start}
+.rcard h4{grid-column:1/-1;font:800 20px/1.15 var(--f-display);margin-top:8px}
+.rcard p{grid-column:1/-1;font-size:16px;color:var(--ink-2)}
+.rcard .meta{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px}
+.rcard .meta span{font:600 12.5px var(--f-ui);background:var(--paper-2);border-radius:8px;padding:4px 9px;color:var(--muted)}
+.rcard .meta .ver{color:#1C8C4B;background:#EAF7EF}
+.rcard .shots{grid-column:1/-1;display:flex;gap:8px;margin-top:8px}
+.rcard .shots img{width:120px;height:90px;object-fit:cover;border-radius:12px;border:2px solid var(--ink);cursor:zoom-in}
+.rcard .help{margin-left:auto;display:inline-block;font:700 13px var(--f-ui);color:var(--muted);padding:5px 10px;border-radius:9px;border:1.5px solid var(--line);background:#fff}
+.rcard .help.on{color:#1C8C4B;border-color:#1C8C4B;background:#EAF7EF}
+.reply{grid-column:1/-1;margin-top:10px;border-left:4px solid var(--orange);background:var(--paper-2);border-radius:0 14px 14px 0;padding:10px 14px;font-size:15px}
+.reply b{display:block;font:800 13px var(--f-ui);margin-bottom:2px}
+.rmore{display:flex;justify-content:center;margin-top:20px}
+.lightbox{position:fixed;inset:0;z-index:300;background:rgba(22,22,29,.85);display:none;place-items:center;padding:20px}
+.lightbox.on{display:grid}
+.lightbox img{max-width:min(92vw,720px);max-height:86vh;border-radius:18px;border:3px solid #fff}
+
+/* soru-cevap */
+.qa-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:40px;align-items:start}
+.qitem{border-bottom:2px solid var(--line);padding:18px 0}
+.qitem:first-child{padding-top:0}
+.qitem .q{font:800 17px/1.3 var(--f-ui);display:flex;gap:10px}
+.qitem .q::before{content:"S";flex:none;width:26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px}
+.qitem .a{display:flex;gap:10px;margin-top:10px;font-size:15.5px;color:var(--ink-2)}
+.qitem .a::before{content:"C";flex:none;width:26px;height:26px;border-radius:8px;background:var(--orange);color:#fff;display:grid;place-items:center;font:800 13px var(--f-ui)}
+.qitem small{display:block;margin:6px 0 0 36px;font:600 12.5px var(--f-ui);color:var(--muted)}
+.ask{position:sticky;top:140px;border-radius:24px;border:2px solid var(--ink);background:var(--yellow-l);padding:22px;box-shadow:var(--sh)}
+.ask h3{font:800 24px/1.1 var(--f-display)}
+.ask p{color:var(--muted);font-size:15px;margin:6px 0 14px}
+.ask textarea{width:100%;height:110px;border-radius:14px;border:2px solid var(--ink);padding:12px 14px;font:600 15.5px var(--f-body);resize:none;outline:none}
+.ask .btn{width:100%;margin-top:12px;height:50px;font-size:16px}
+.ask small{display:block;margin-top:10px;font:600 12.5px var(--f-ui);color:var(--muted)}
+
+/* politika kartları + son çağrı */
+.pol{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:36px}
+.pol div{border-radius:22px;border:2px solid var(--ink);background:#fff;padding:22px}
+.pol span{font-size:30px}
+.pol h3{font:800 21px/1.1 var(--f-display);margin:10px 0 6px}
+.pol p{color:var(--muted);font-size:15px}
+.final{background-color:var(--blue);color:#fff;padding:80px 0;position:relative;overflow:hidden}
+.final .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:40px;align-items:center;position:relative}
+.final .h-l{color:#fff}
+.final .lead{color:#DCE6FF;margin:16px 0 26px}
+.final-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.final .trio-img{display:flex;justify-content:center;align-items:flex-end;gap:0}
+.final .trio-img img{height:210px;width:auto;filter:drop-shadow(0 16px 14px rgba(0,0,0,.3))}
+.final .trio-img img:nth-child(2){height:250px;margin:0 -30px;position:relative;z-index:2}
+.final small{display:block;margin-top:16px;color:#DCE6FF;font:600 14px var(--f-ui)}
+
+/* ================= MOBİL ================= */
+@media (max-width:1100px){
+  .pdp-grid{grid-template-columns:1fr;gap:30px}
+  .pg{position:static}
+  .g-grid{grid-template-columns:1fr 1fr}
+  .cap-grid{grid-template-columns:1fr 1fr}
+  .rv-top,.qa-grid,.spec-grid{grid-template-columns:1fr}
+  .rsum,.ask{position:static}
+  .sn-buy{display:none}
+}
+@media (max-width:720px){
+  .pdp{padding:14px 0 40px}
+  .crumb{display:none}
+  .pdp-grid{display:flex;flex-direction:column;align-items:stretch;gap:0}
+  .pdp-grid>*,.bb>*{min-width:0}
+  .lbl{margin:18px 0 10px}
+  .lbl.l-col{display:flex}
+  .ship>div{font-size:13.5px;padding:10px 12px}
+  .ship b{font-weight:800}
+  .bb-incl{font-size:12.5px}
+  .bb-pay{font-size:13.5px;gap:6px 14px}
+  .inst{left:auto;right:-60px;width:280px}
+  .rv-top{grid-template-columns:minmax(0,1fr)}
+  .rv-top>*{min-width:0}
+  .qa-grid,.spec-grid,.flow{grid-template-columns:minmax(0,1fr)}
+  .rsum{padding:18px}
+  .rsum .big b{font-size:52px}
+  .rsum .btn{display:none}
+  .rcard .shots img{width:84px;height:64px}
+  .rcard p{font-size:15px}
+  .reply{font-size:14px}
+  .inbox img{aspect-ratio:16/10}
+  .qitem{padding:14px 0}
+  .qitem .a{font-size:14.5px}
+  .rsum .rec{margin-top:12px;padding-top:12px}
+  .trust{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .trust div{display:block}
+  .trust div span{display:none}
+  .bb{display:contents}
+  .bb-tags{order:1;margin-bottom:10px}
+  .bb h1{order:2;font-size:30px}
+  .bb-rate{order:3;margin:8px 0 14px;font-size:13.5px}
+  .pg{order:4;display:block;margin:0 -16px}
+  .bb-price{order:5;border-top:0;padding-top:0;margin-top:16px}
+  .bb-incl{order:6}
+  .bb-pay{order:7}
+  .lbl.l-col{order:8}.sw{order:9}.ship{order:10}.buyrow{order:11}.now{order:12}.giftbox{order:13}
+  .bb-points{order:14;margin-top:22px}
+  .bb-sub{order:15;font-size:16px}
+  .trust{order:16}.wa-line{order:17}
+  .pg-thumbs,.pg-main{display:none}
+  .pg-swipe{display:block;position:relative}
+  .pg-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .pg-track::-webkit-scrollbar{display:none}
+  .pg-track>*{flex:0 0 100%;scroll-snap-align:center;aspect-ratio:1/1;background:#fff;position:relative}
+  .pg-track img,.pg-track video{width:100%;height:100%;object-fit:contain}
+  .pg-track video{object-fit:cover;background:#111}
+  .pg-count{position:absolute;right:28px;bottom:12px;background:rgba(22,22,29,.75);color:#fff;border-radius:99px;padding:3px 10px;font:700 12px var(--f-ui)}
+  .pg-dots{display:flex;justify-content:center;gap:5px;margin-top:10px}
+  .pg-dots i{width:6px;height:6px;border-radius:3px;background:#D9D2C2;transition:all .25s}
+  .pg-dots i.act{width:18px;background:var(--ink)}
+  .pg-swipe .pg-badges{left:28px}
+  .bb-price b{font-size:38px}
+  .sw button img{height:48px}
+  .buyrow .btn,.qty{height:58px}
+  .now{height:50px}
+  .trust div{font-size:12.5px;padding:9px 10px}
+  .subnav{top:62px}
+  .subnav .wrap{height:52px}
+  .subnav nav{margin:0 -16px;padding:0 16px}
+  .subnav nav a{font-size:13.5px;padding:7px 11px}
+  .sec{padding:60px 0;scroll-margin-top:118px}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:24px}
+  .flow{grid-template-columns:1fr;gap:26px}
+  .flow .vcard{width:62%;margin:0 auto;order:2}
+  .flow-steps{grid-template-columns:1fr 1fr;gap:10px}
+  .fs{padding:14px}
+  .fs h3{font-size:19px}
+  .fs p{font-size:13.5px}
+  .flow-note{font-size:20px}
+  .cap-grid,.g-grid,.ages{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -16px;padding:4px 16px 18px;scrollbar-width:none}
+  .cap-grid::-webkit-scrollbar,.g-grid::-webkit-scrollbar,.ages::-webkit-scrollbar{display:none}
+  .capc,.gq,.age{flex:0 0 80%;scroll-snap-align:center}
+  .giftbar{grid-template-columns:1fr;gap:12px;padding:18px}
+  .giftbar .ic{display:none}
+  .cmp-wrap{margin:0 -16px;border-radius:0;border-left:0;border-right:0;box-shadow:none}
+  .cmp{min-width:640px}
+  .cmp-swipe{display:block;text-align:center;margin-top:10px;font:700 13px var(--f-ui);color:var(--muted)}
+  .cmp th,.cmp td{padding:12px 10px;font-size:13.5px}
+  .cmp th:first-child,.cmp td:first-child{position:sticky;left:0;background:#fff;z-index:1;width:130px;box-shadow:2px 0 0 var(--line)}
+  .inbox li{padding:12px;font-size:14px}
+  .spec dl{grid-template-columns:44% 56%;padding:0 16px 12px}
+  .spec summary{padding:14px 16px}
+  .rfilters{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px 16px;padding:0 16px 4px;scrollbar-width:none}
+  .rfilters::-webkit-scrollbar{display:none}
+  .rfilters button{flex:none}
+  .rfilters select{margin-left:0;flex:none}
+  .topics{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px 14px;padding:0 16px 4px;scrollbar-width:none}
+  .topics span{flex:none}
+  .rcard{padding:16px;grid-template-columns:minmax(0,1fr)}
+  .rcard .stars{grid-row:2}
+  .rcard .shots img{width:96px;height:72px}
+  .pol{grid-template-columns:1fr;gap:12px}
+  .final{padding:60px 0 120px}
+  .final .wrap{grid-template-columns:1fr}
+  .final .trio-img{order:-1}
+  .final .trio-img img{height:120px}
+  .final .trio-img img:nth-child(2){height:150px;margin:0 -18px}
+}
+</style>
+</head>
+<body>
+
+<div class="draft" id="draft"><b>Sunum taslağı.</b> Yorumlar, soru-cevaplar, puanlar, fiyatlar ve iletişim bilgileri örnektir; gerçek değildir.</div>
+<script>if(/[?&]sunum/.test(location.search))document.getElementById('draft').remove()</script>
+
+<div class="bar" role="region" aria-label="Avantajlar">
+  <div>🚚 Ücretsiz kargo · aynı gün kargoda</div>
+  <div>↩️ 14 gün ücretsiz iade</div>
+  <div>💳 Kapıda ödeme · peşin fiyatına 3 taksit</div>
+</div>
+
+<header class="top" id="top">
+  <div class="wrap nav">
+    <a href="index.html" class="logo" aria-label="Örnek ana sayfa"><span class="o">o<i></i><i></i></span>rnek<small>OXPI</small></a>
+    <nav class="menu" aria-label="Ana menü">
+      <a href="index.html#nasil"><span>🖍️</span>Nasıl çalışır</a>
+      <a href="index.html#dene"><span>🎨</span>Hemen dene</a>
+      <a href="#yorumlar"><span>💬</span>Aileler ne diyor</a>
+      <a href="index.html#hediye"><span>🎁</span>Hediye</a>
+      <a href="#sss"><span>❓</span>Sorular</a>
+    </nav>
+    <div class="nav-r">
+      <button class="icon-btn" aria-label="Sepet" id="cartBtn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>
+        <span class="badge" id="cartCount">0</span>
+      </button>
+      <button class="icon-btn burger" aria-label="Menü"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ 01 ÜRÜN ÜST ALAN ============ -->
+<section class="pdp" id="urun">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Sayfa yolu"><a href="index.html">Ana sayfa</a>›<a href="#">Eğitici oyuncaklar</a>›<a href="#">Yapay zekâlı oyuncaklar</a>›<span>OXPI Çocuk Yazıcısı</span></nav>
+    <div class="pdp-grid">
+
+      <!-- galeri -->
+      <div class="pg" id="gallery">
+        <div class="pg-thumbs" id="pgThumbs" role="tablist" aria-label="Ürün görselleri"></div>
+        <div class="pg-main" id="pgMain">
+          <div class="pg-badges"><span class="y">⭐ 4,9 · 1.248 aile</span><span>🧻 3 rulo etiket hediye</span></div>
+          <img id="pgImg" src="assets/img/g-sari.jpg" alt="OXPI Yapay Zekâlı Çocuk Yazıcısı, sarı">
+          <video id="pgVid" playsinline controls preload="none" poster="assets/video/hero-akis.jpg"></video>
+          <span class="pg-cap" id="pgCap">Sarı</span>
+        </div>
+        <div class="pg-swipe">
+          <div class="pg-track" id="pgTrack"></div>
+          <div class="pg-badges"><span class="y">⭐ 4,9 · 1.248 aile</span></div>
+          <span class="pg-count" id="pgCount">1 / 9</span>
+          <div class="pg-dots" id="pgDots"></div>
+        </div>
+      </div>
+
+      <!-- satın alma kutusu -->
+      <div class="bb" id="bb">
+        <div class="bb-tags"><span class="tag new">Yeni nesil</span><span class="tag">👶 4+ yaş</span><span class="tag">🗣️ Türkçe konuşur</span><span class="tag">🖨️ Mürekkepsiz</span></div>
+        <h1>OXPI Yapay Zekâlı Çocuk Yazıcısı</h1>
+        <p class="bb-sub">Çocuğun söyler, OXPI çizer ve saniyeler içinde yapışkanlı etikete basar. Boyaması ve hayal gücü çocuğa kalır.</p>
+        <div class="bb-rate"><span class="stars">★★★★★</span><b>4,9</b><a href="#yorumlar">1.248 değerlendirme</a>·<a href="#yorumlar" data-filter="foto">312 fotoğraflı</a>·<a href="#soru-cevap">86 soru-cevap</a></div>
+        <ul class="bb-points">
+          <li><span style="background:var(--yellow)">🎙️</span><div><b>Söyle, çizsin, bassın:</b> “Kaykay süren bir dinozor” bile.</div></li>
+          <li><span style="background:#9CC2FF">💬</span><div><b>Soruları cevaplar:</b> dinozorlar, İngilizce kelimeler, toplama…</div></li>
+          <li><span style="background:var(--pink)">🖍️</span><div><b>Ekranda kalmaz:</b> asıl iş kâğıtta, kalemde, çocuğun elinde.</div></li>
+        </ul>
+
+        <div class="bb-price"><b>2.499 TL</b><s>3.299 TL</s><span class="off">800 TL indirim</span></div>
+        <div class="bb-incl">✓ KDV dahil · ✓ Kargo ücretsiz · ✓ Kapıda ödemede ek ücret yok</div>
+        <div class="bb-pay">
+          <span>💳 Peşin fiyatına 3 × 833 TL</span>
+          <details><summary>Taksit seçenekleri</summary>
+            <div class="inst">
+              <div><span>Tek çekim</span><b>2.499,00 TL</b></div>
+              <div><span>2 taksit</span><b>2 × 1.249,50 TL</b></div>
+              <div><span>3 taksit</span><b>3 × 833,00 TL</b></div>
+              <small>Tüm kredi kartlarına peşin fiyatına. Ödeme iyzico güvencesiyle alınır.</small>
+            </div>
+          </details>
+          <span>🚪 Kapıda ödeme</span>
+        </div>
+
+        <div class="lbl l-col">Renk <em id="colorName">Civciv Sarı</em></div>
+        <div class="sw" id="colors">
+          <button class="act" data-color="sari" data-name="Civciv Sarı" style="--c:var(--yellow-l)"><img src="assets/img/urun-sari.webp" alt="">Sarı</button>
+          <button data-color="pembe" data-name="Şeker Pembe" style="--c:var(--pink-l)"><img src="assets/img/urun-pembe.webp" alt="">Pembe</button>
+          <button data-color="gri" data-name="Bulut Gri" style="--c:#EEF0F4"><img src="assets/img/urun-gri.webp" alt="">Gri</button>
+        </div>
+
+        <div class="ship">
+          <div><span>⚡</span><div><b class="cut" id="cutText">Bugün kargoda</b> · <span id="cutLeft"></span></div></div>
+          <div><span>📦</span><div>Tahmini teslimat: <b id="eta">—</b></div></div>
+        </div>
+
+        <div class="buyrow">
+          <div class="qty" aria-label="Adet"><button id="qMinus" aria-label="Azalt">−</button><output id="qty">1</output><button id="qPlus" aria-label="Artır">+</button></div>
+          <button class="btn btn-o" id="addBtn">Sepete ekle</button>
+        </div>
+        <button class="btn btn-k now" id="nowBtn">Hemen satın al →</button>
+
+        <div class="giftbox" id="giftbox">
+          <label><input type="checkbox" id="giftChk"> 🎁 Hediye paketi + not kartı, faturada fiyat yazmasın <em>Ücretsiz</em></label>
+          <textarea id="giftNote" maxlength="120" placeholder="Notun… (ör. İyi ki doğdun Ada! Sevgilerle, teyzen)"></textarea>
+          <p><span id="noteLen">0</span>/120 · Notun el yazısı tadında bir karta basılıp kutuya eklenir.</p>
+        </div>
+
+        <div class="trust">
+          <div><span>🚚</span><div><b>Ücretsiz kargo</b>Tüm Türkiye'ye</div></div>
+          <div><span>↩️</span><div><b>14 gün iade</b>Ücretsiz, sorgusuz</div></div>
+          <div><span>🛡️</span><div><b>2 yıl garanti</b>Türkiye'de destek</div></div>
+          <div><span>🔒</span><div><b>Güvenli ödeme</b>iyzico · 3D Secure</div></div>
+        </div>
+        <a href="#" class="wa-line">💬 Aklına takılan bir şey mi var? WhatsApp'tan sor, 5 dk'da dönelim</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ALT MENÜ ============ -->
+<div class="subnav" id="subnav">
+  <div class="wrap">
+    <nav id="snav" aria-label="Sayfa bölümleri">
+      <a href="#nasil">Nasıl çalışır</a><a href="#yapabilir">Neler yapabilir</a><a href="#ebeveyn">Güvenlik</a><a href="#kimin">Yaş rehberi</a><a href="#karsilastir">Karşılaştır</a><a href="#ozellikler">Özellikler</a><a href="#yorumlar">Yorumlar</a><a href="#soru-cevap">Soru-cevap</a><a href="#sss">SSS</a>
+    </nav>
+    <div class="sn-buy" id="snBuy"><img id="snImg" src="assets/img/urun-sari.webp" alt=""><div class="t"><span id="snName">Civciv Sarı</span><b>2.499 TL</b></div><button class="btn btn-o" id="snAdd">Sepete ekle</button></div>
+  </div>
+</div>
+
+<!-- ============ 02 NASIL ÇALIŞIR ============ -->
+<section class="sec" id="nasil">
+  <div class="wrap flow">
+    <div class="vcard rv"><video id="fv" data-src="assets/video/hero-akis.mp4" poster="assets/video/hero-akis.jpg" muted loop playsinline preload="none"></video><button class="snd" data-for="fv"><span class="off">🔇 Sesi aç</span><span class="on">🔊 Sesi kapat</span></button></div>
+    <div>
+      <span class="eyebrow rv">🖍️ 20 saniyede OXPI</span>
+      <h2 class="h-l rv d1" style="margin-top:12px">Kurulumu yok sayılır,<br><span class="mark">oyunu bitmez.</span></h2>
+      <div class="flow-steps">
+        <div class="fs rv d1"><i style="--c:var(--yellow)">🎙️</i><h3>1 · Söyle</h3><p>AI düğmesine bas, ne istediğini anlat.</p></div>
+        <div class="fs rv d2"><i style="--c:var(--pink)">✏️</i><h3>2 · Çizsin</h3><p>Çizim 2,8" ekranda birkaç saniyede belirir.</p></div>
+        <div class="fs rv d3"><i style="--c:#9CC2FF">🖨️</i><h3>3 · Bassın</h3><p>Yapışkanlı etikete basar. Mürekkep yok, kartuş yok.</p></div>
+        <div class="fs rv d4"><i style="--c:#A6E7B9">🖍️</i><h3>4 · Boya, yapıştır</h3><p>Kalemler kutuda. Defter, dolap, kapı… nereye isterse.</p></div>
+      </div>
+      <p class="flow-note rv">✍️ İlk kurulum: şarja tak, Türkçe uygulamadan Wi-Fi'yi seç. Hepsi bu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 NELER YAPABİLİR ============ -->
+<section class="sec" id="yapabilir" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow rv">✨ Tek cihaz, altı oyun</span><h2 class="h-l rv d1" style="margin-top:12px">Neler yapabilir?</h2></div>
+      <p class="lead rv d2">Aşağıdaki konuşmaların hepsi videolardaki gerçek cihaz cevaplarından. Sesi açıp dinleyebilirsin.</p>
+    </div>
+    <div class="cap-grid">
+      <article class="capc rv" style="--c:var(--yellow)"><div class="v"><video id="c1" data-src="assets/video/akis-araba.mp4" poster="assets/video/akis-araba.jpg" muted loop playsinline preload="none"></video><button class="snd" data-for="c1"><span class="off">🔇 Dinle</span><span class="on">🔊 Kapat</span></button></div>
+        <div class="b"><h3>🎨 Hayalini çizer</h3><div class="q"><p class="k">Bana bir yarış arabası çizer misin?</p><p class="o">Tamam, hemen çiziyorum!</p></div></div></article>
+      <article class="capc rv d1" style="--c:#9CC2FF"><div class="v"><video id="c2" data-src="assets/video/seri1-0-soru.mp4" poster="assets/video/seri1-0-soru.jpg" muted loop playsinline preload="none"></video><button class="snd" data-for="c2"><span class="off">🔇 Dinle</span><span class="on">🔊 Kapat</span></button></div>
+        <div class="b"><h3>🔭 Merakını giderir</h3><div class="q"><p class="k">Dinozorlar neden yok oldu?</p><p class="o">Dev bir göktaşı çarptı… Ama sürpriz: kuşlar onların torunu!</p></div></div></article>
+      <article class="capc rv d2" style="--c:var(--pink)"><div class="v"><video id="c3" data-src="assets/video/ingilizce.mp4" poster="assets/video/ingilizce.jpg" muted loop playsinline preload="none"></video><button class="snd" data-for="c3"><span class="off">🔇 Dinle</span><span class="on">🔊 Kapat</span></button></div>
+        <div class="b"><h3>🔤 İngilizce öğretir</h3><div class="q"><p class="k">Köpek İngilizce ne demek?</p><p class="o">Dog. Sen de söyle!</p></div></div></article>
+      <article class="capc rv" style="--c:#A6E7B9"><div class="v"><video id="c4" data-src="assets/video/matematik.mp4" poster="assets/video/matematik.jpg" muted loop playsinline preload="none"></video><button class="snd" data-for="c4"><span class="off">🔇 Dinle</span><span class="on">🔊 Kapat</span></button></div>
+        <div class="b"><h3>🔢 Birlikte sayar</h3><div class="q"><p class="k">3 artı 2 kaç eder?</p><p class="o">5! Hadi sayalım: 1, 2, 3, 4, 5.</p></div></div></article>
+      <article class="capc rv d1" style="--c:#FFD8B5"><div class="v"><video id="c5" data-src="assets/video/sohbet-mavi.mp4" poster="assets/video/sohbet-mavi.jpg" muted loop playsinline preload="none"></video><button class="snd" data-for="c5"><span class="off">🔇 Dinle</span><span class="on">🔊 Kapat</span></button></div>
+        <div class="b"><h3>💛 Sohbet eder</h3><div class="q"><p class="o">Senin en sevdiğin renk ne?</p><p class="k">Kırmızı! Seninki ne?</p></div></div></article>
+      <article class="capc rv d2" style="--c:#DCD3FF"><div class="v"><video data-src="assets/video/telefon-cikti-2.mp4" poster="assets/video/telefon-cikti-2.jpg" muted loop playsinline preload="none"></video></div>
+        <div class="b"><h3>📱 Telefondan basar</h3><div class="q"><p class="o">Fotoğraf, hazır şablon, yapılacaklar listesi… Türkçe uygulamadan seç, etikete bassın.</p></div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 EBEVEYN REHBERİ ============ -->
+<section class="sec guide tear-tb" id="ebeveyn">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow rv" style="color:var(--yellow)">🛡️ Ebeveyn rehberi</span><h2 class="h-l rv d1" style="margin-top:12px">Almadan önce aklındaki<br>4 soru.</h2></div>
+      <p class="lead rv d2">Çocuğun için bir şey alırken “güzel mi” sorusundan önce “güvenli mi” sorusu gelir. Dürüst cevaplarımız:</p>
+    </div>
+    <div class="g-grid">
+      <div class="gq rv" style="--c:#9CC2FF"><span class="ic">🔒</span><h3>Yapay zekâ güvenli mi?</h3><p>Çocuklara uygun <b>içerik filtresiyle</b> çalışır, uygun olmayan isteklere cevap vermez. Cevaplar kısa ve çocuk diline göre.</p></div>
+      <div class="gq rv d1" style="--c:var(--yellow)"><span class="ic">📺</span><h3>Bu da bir ekran değil mi?</h3><p>2,8" ekran yalnızca <b>çizimin önizlemesi</b> için. Video akışı, oyun, reklam yok. Asıl zaman kâğıt ve kalemle geçiyor.</p></div>
+      <div class="gq rv d2" style="--c:var(--pink)"><span class="ic">🧪</span><h3>Mürekkep, kartuş, pil?</h3><p><b>Termal baskı:</b> mürekkep ve kartuş yok, el ve masa kirlenmez. Pil değil, Type-C ile şarj olan dahili batarya.</p></div>
+      <div class="gq rv d3" style="--c:#A6E7B9"><span class="ic">📶</span><h3>İnternet gerekiyor mu?</h3><p>Yapay zekâ özellikleri için <b>Wi-Fi ya da telefonunun hotspot'u</b> yeterli. Kurulum Türkçe uygulamadan birkaç dakika.</p></div>
+    </div>
+    <div class="g-foot rv"><span>✅ 4+ yaş için tasarlandı</span><span>✅ Türkçe konuşur, Türkçe anlar</span><span>✅ 2 yıl garanti</span><span>✅ 14 gün ücretsiz iade</span></div>
+  </div>
+</section>
+
+<!-- ============ 05 KİMLER İÇİN + HEDİYE ============ -->
+<section class="sec" id="kimin">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow rv">👧 Yaş rehberi</span><h2 class="h-l rv d1" style="margin-top:12px">Her yaşta başka bir oyun.</h2></div>
+      <p class="lead rv d2">OXPI çocukla birlikte büyür. Aynı cihaz, yaşa göre farklı şekilde kullanılır.</p>
+    </div>
+    <div class="ages">
+      <div class="age rv" style="--c:var(--yellow-l)"><b>4–5 <small>yaş</small></b><h3>“Bana bir … çiz!”</h3><ul><li>Hayal ettiğini çizdirir</li><li>Boyar, soyar, yapıştırır</li><li>Renkleri, hayvanları öğrenir</li></ul><img src="assets/img/cizim/kopek-boyali.png" alt=""></div>
+      <div class="age rv d1" style="--c:var(--pink-l)"><b>6–7 <small>yaş</small></b><h3>“Peki neden?”</h3><ul><li>Merak ettiklerini sorar</li><li>İngilizce kelime öğrenir</li><li>Toplama, sayma pratiği yapar</li></ul><img src="assets/img/cizim/roket-boyali.png" alt=""></div>
+      <div class="age rv d2" style="--c:#E3EEFF"><b>8–10 <small>yaş</small></b><h3>“Ajandama ekle.”</h3><ul><li>Ders programı, yapılacaklar</li><li>Telefondan fotoğraf basar</li><li>Kendi sticker serisini yapar</li></ul><img src="assets/img/cizim/tavuk-boyali.png" alt=""></div>
+    </div>
+    <div class="giftbar rv">
+      <span class="ic">🎁</span>
+      <div><h3>Hediye olarak mı alıyorsun?</h3><p>Hediye paketi ve not kartı ücretsiz, faturada fiyat yazmaz. Karne ve doğum günü dönemlerinde en çok bu seçenek tercih ediliyor.</p>
+        <div class="chips2" id="giftChips"><button>🎒 Karne hediyesi</button><button>🎂 Doğum günü</button><button>👧 5 yaş kız çocuğuna</button><button>👦 6 yaş erkek çocuğuna</button><button>🎄 Yeni yıl</button></div></div>
+      <button class="btn btn-o" id="giftGo">Hediye olarak al</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 KARŞILAŞTIR ============ -->
+<section class="sec" id="karsilastir" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow rv">⚖️ Dürüst karşılaştırma</span><h2 class="h-l rv d1" style="margin-top:12px">Neden çocuk fotoğraf makinesi değil?</h2></div>
+      <p class="lead rv d2">Ebeveynlerin en çok kıyasladığı üç seçenekle yan yana. Eksiğimizi de yazdık.</p>
+    </div>
+    <div class="cmp-wrap rv">
+      <table class="cmp">
+        <thead><tr><th></th><th class="us">🐥 OXPI<small>Yapay zekâlı yazıcı</small></th><th>📷 Çocuk fotoğraf makinesi<small>anında baskılı</small></th><th>📱 Tablet<small>uygulamalarla</small></th><th>📕 Boyama kitabı<small>klasik</small></th></tr></thead>
+        <tbody>
+          <tr><td>Çocuğun hayal ettiğini çizer</td><td class="us"><span class="y">✓</span> Söylemesi yeterli</td><td><span class="n">✕</span></td><td><span class="m">~</span> Uygulamaya bağlı</td><td><span class="n">✕</span></td></tr>
+          <tr><td>Sorularını cevaplar, öğretir</td><td class="us"><span class="y">✓</span> Türkçe, sesli</td><td><span class="n">✕</span></td><td><span class="y">✓</span></td><td><span class="n">✕</span></td></tr>
+          <tr><td>Kâğıda basar, boyatır</td><td class="us"><span class="y">✓</span> Yapışkanlı etiket</td><td><span class="y">✓</span> Fotoğraf basar</td><td><span class="n">✕</span></td><td><span class="y">✓</span></td></tr>
+          <tr><td>Her seferinde yeni içerik</td><td class="us"><span class="y">✓</span> Sınırsız çizim</td><td><span class="m">~</span> Çektiği kadar</td><td><span class="y">✓</span></td><td><span class="n">✕</span> Sayfalar biter</td></tr>
+          <tr><td>Ekrana bakma süresi</td><td class="us">Kısa · sadece önizleme</td><td>Kısa</td><td><span class="n">Uzun</span></td><td>Yok</td></tr>
+          <tr><td>Mürekkep / kartuş</td><td class="us">Gerekmez</td><td>Gerekmez</td><td>—</td><td>—</td></tr>
+          <tr><td>Fotoğraf çeker</td><td class="us"><span class="n">✕</span> Telefondan basar</td><td><span class="y">✓</span></td><td><span class="y">✓</span></td><td><span class="n">✕</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cmp-swipe">← Tabloyu kaydırarak diğer seçenekleri gör →</p>
+    <p class="cmp-note rv">Karşılaştırma ürün kategorilerinin genel özelliklerine göre yapılmıştır; tek tek marka ve modeller farklılık gösterebilir.</p>
+  </div>
+</section>
+
+<!-- ============ 07 ÖZELLİKLER ============ -->
+<section class="sec" id="ozellikler">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow rv">📦 Kutu ve teknik özellikler</span><h2 class="h-l rv d1" style="margin-top:12px">Kutudan çıkanlar.</h2></div>
+      <p class="lead rv d2">Ayrıca bir şey almana gerek yok. Kalemler ve ilk etiketler kutunun içinde.</p>
+    </div>
+    <div class="spec-grid">
+      <div class="rv">
+        <div class="inbox"><img src="assets/img/g-kapak.jpg" alt="Kutu içeriği: cihaz, 3 rulo etiket, renkli kalemler, Type-C kablo" loading="lazy">
+          <ul><li><span>🐥</span>OXPI cihaz</li><li><span>🧻</span>3 rulo yapışkanlı etiket</li><li><span>🖍️</span>Renkli keçeli kalemler</li><li><span>🔌</span>Type-C şarj kablosu</li></ul></div>
+        <div class="scale"><span>✋</span><div><b>Avuç içi kadar:</b> 96 × 90 × 88,5 mm, 362 g. Bir çay bardağı tabağına sığar, okul çantasına girer.</div></div>
+      </div>
+      <div class="spec rv d1">
+        <details open><summary>Boyut ve tasarım</summary><dl><dt>Boyut</dt><dd>96 × 90 × 88,5 mm</dd><dt>Ağırlık</dt><dd>362 g</dd><dt>Renkler</dt><dd>Civciv Sarı · Şeker Pembe · Bulut Gri</dd><dt>Ekran</dt><dd>2,8" renkli ekran</dd></dl></details>
+        <details open><summary>Baskı</summary><dl><dt>Teknoloji</dt><dd>Termal baskı (mürekkepsiz)</dd><dt>Çözünürlük</dt><dd>200 DPI</dd><dt>Kâğıt</dt><dd>Yapışkanlı termal etiket rulosu</dd></dl></details>
+        <details><summary>Yapay zekâ ve bağlantı</summary><dl><dt>Dil</dt><dd>Türkçe (İngilizce kelime öğretimi)</dd><dt>Kullanım</dt><dd>Sesli komut, soru-cevap, sohbet, çizim</dd><dt>Bağlantı</dt><dd>Wi-Fi veya telefon hotspot</dd><dt>Uygulama</dt><dd>Türkçe mobil uygulama</dd><dt>Güvenlik</dt><dd>Çocuklara uygun içerik filtresi</dd></dl></details>
+        <details><summary>Güç</summary><dl><dt>Batarya</dt><dd>1300 mAh dahili, şarj edilebilir</dd><dt>Şarj</dt><dd>Type-C</dd></dl></details>
+        <details><summary>Garanti ve uygunluk</summary><dl><dt>Yaş</dt><dd>4 yaş ve üzeri</dd><dt>Garanti</dt><dd>2 yıl, Türkiye'de destek</dd><dt>İade</dt><dd>14 gün içinde ücretsiz</dd></dl></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 YORUMLAR ============ -->
+<section class="sec" id="yorumlar" style="background:var(--paper-2);border-top:2px solid var(--ink)">
+  <div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow rv">💬 Doğrulanmış alıcılar</span><h2 class="h-l rv d1" style="margin-top:12px">Ailelerin yorumları.</h2></div></div>
+    <div class="rv-top">
+      <aside class="rsum rv">
+        <div class="big"><b>4,9</b><div><span class="stars">★★★★★</span><br>1.248 değerlendirme</div></div>
+        <div class="dist" id="dist">
+          <button data-star="5">5 ★<i style="--w:91%"></i>1.136</button>
+          <button data-star="4">4 ★<i style="--w:7%"></i>87</button>
+          <button data-star="3">3 ★<i style="--w:1%"></i>12</button>
+          <button data-star="2">2 ★<i style="--w:.4%"></i>5</button>
+          <button data-star="1">1 ★<i style="--w:.6%"></i>8</button>
+        </div>
+        <div class="rec"><b>%97</b>alıcı bir yakınına tavsiye ediyor</div>
+        <button class="btn" id="writeRev">✍️ Yorum yaz</button>
+      </aside>
+      <div>
+        <div class="topics rv"><span>👍 Kolay kurulum <small>204</small></span><span>🖍️ Kalemler kutuda <small>167</small></span><span>🎁 Hediye için ideal <small>241</small></span><span>📱 Tablet süresi azaldı <small>138</small></span><span class="neg">🧻 Rulo çabuk bitiyor <small>39</small></span></div>
+        <div class="rfilters" id="rfilters">
+          <button class="act" data-f="all">Tümü</button><button data-f="foto">📷 Fotoğraflı</button><button data-f="hediye">🎁 Hediye alanlar</button><button data-f="kucuk">4–5 yaş</button><button data-f="buyuk">6–8 yaş</button><button data-f="kritik">Eleştiriler</button>
+          <select id="rsort" aria-label="Sırala"><option value="help">En faydalı</option><option value="new">En yeni</option></select>
+        </div>
+        <div class="rlist" id="rlist">
+          <article class="rcard" data-tags="foto buyuk" data-star="5" data-help="48" data-date="21">
+            <div class="who"><img class="av" src="assets/img/av-merve.jpg" alt=""><div><b>Merve D.</b><small>Antalya · 3 hafta önce</small></div></div><span class="stars">★★★★★</span>
+            <h4>Buzdolabımız sergi salonuna döndü</h4>
+            <p>İkisi sırayla kullanıyor. Kavga etmesinler diye “herkese günde 3 etiket” kuralı koyduk 😅 Termal kâğıt olduğu için mürekkep derdi yok, bizim için en büyük artısı bu oldu.</p>
+            <div class="shots"><img src="assets/img/ugc-buzdolabi.jpg" alt="Müşteri fotoğrafı" loading="lazy"></div>
+            <div class="meta"><span>Renk: Sarı</span><span>Çocuklar: 8 ve 5 yaş</span><span class="ver">✔ Doğrulanmış alıcı</span><button class="help">👍 Faydalı (<b>48</b>)</button></div>
+          </article>
+          <article class="rcard" data-tags="kritik kucuk" data-star="4" data-help="41" data-date="14">
+            <div class="who"><img class="av" src="assets/img/av-zeynep.jpg" alt=""><div><b>Zeynep A.</b><small>Ankara · 2 hafta önce</small></div></div><span class="stars">★★★★☆</span>
+            <h4>Kurulumda 10 dakika uğraştım, sonrası çok keyifli</h4>
+            <p>Wi-Fi'ye bağlarken şifreyi yanlış girmişim, uygulamadan tekrar deneyince oldu. Ada artık her sabah bir etiket bastırıp kreş çantasına yapıştırıyor. Bir yıldızı kurulum için kırdım, ürün tam puan.</p>
+            <div class="meta"><span>Renk: Pembe</span><span>Kızı: 4 yaş</span><span class="ver">✔ Doğrulanmış alıcı</span><button class="help">👍 Faydalı (<b>41</b>)</button></div>
+            <div class="reply"><b>🐥 Örnek ekibi yanıtladı</b>Zeynep Hanım, geri bildiriminiz için teşekkürler! Kurulumu kolaylaştırmak için kutuya Türkçe, resimli bir “ilk 3 dakika” kartı ekledik. Takıldığınız an WhatsApp'tan bize yazabilirsiniz.</div>
+          </article>
+          <article class="rcard" data-tags="foto buyuk" data-star="5" data-help="37" data-date="30">
+            <div class="who"><img class="av" src="assets/img/av-burak.jpg" alt=""><div><b>Burak T.</b><small>İzmir · 1 ay önce</small></div></div><span class="stars">★★★★★</span>
+            <h4>“Neden” sorularına ortak bulduk</h4>
+            <p>Can bizi sorularıyla bitiriyordu. Şimdi önce OXPI'ye soruyor, sonra gelip bize anlatıyor. Dinozorların kuşlarla akraba olduğunu üç gün boyunca herkese anlattı. Dün de gladyatör tavuk istedi, yemekten sonra oturup boyadı.</p>
+            <div class="shots"><img src="assets/img/ugc-boyama.jpg" alt="Müşteri fotoğrafı" loading="lazy"></div>
+            <div class="meta"><span>Renk: Gri</span><span>Oğlu: 6 yaş</span><span class="ver">✔ Doğrulanmış alıcı</span><button class="help">👍 Faydalı (<b>37</b>)</button></div>
+          </article>
+          <article class="rcard" data-tags="kritik buyuk" data-star="4" data-help="29" data-date="9">
+            <div class="who"><span class="av" style="background:#7A5AF8">DŞ</span><div><b>Derya Ş.</b><small>Gaziantep · 9 gün önce</small></div></div><span class="stars">★★★★☆</span>
+            <h4>Çok seviyor ama rulolar çabuk bitiyor</h4>
+            <p>Oğlum ilk hafta bir ruloyu bitirdi, her şeyi bastırmak istiyor 🙂 Kutudaki 3 rulo bir süre idare eder ama yedek rulo şart. Ürünün kendisinden çok memnunuz, çizimleri gerçekten istediği gibi.</p>
+            <div class="meta"><span>Renk: Sarı</span><span>Oğlu: 7 yaş</span><span class="ver">✔ Doğrulanmış alıcı</span><button class="help">👍 Faydalı (<b>29</b>)</button></div>
+            <div class="reply"><b>🐥 Örnek ekibi yanıtladı</b>Derya Hanım, çok haklısınız. Yedek etiket ruloları çok yakında sitemizde olacak. Sayfanın altından e-postanızı bırakırsanız stoğa girdiği gün ilk size haber verelim.</div>
+          </article>
+          <article class="rcard" data-tags="hediye buyuk" data-star="5" data-help="33" data-date="14">
+            <div class="who"><img class="av" src="assets/img/av-hatice.jpg" alt=""><div><b>Hatice K.</b><small>Bursa · 2 hafta önce</small></div></div><span class="stars">★★★★★</span>
+            <h4>Torunuma aldığım en güzel hediye</h4>
+            <p>Doğum günü için aldım, diğer oyuncaklar bir kenarda kaldı. Telefonda görüntülü konuşurken bile yeni çizimlerini kameraya gösteriyor. Paketi de çok özenliydi, ertesi gün elimdeydi.</p>
+            <div class="meta"><span>Renk: Pembe</span><span>Torunu: 7 yaş</span><span>🎁 Hediye</span><span class="ver">✔ Doğrulanmış alıcı</span><button class="help">👍 Faydalı (<b>33</b>)</button></div>
+          </article>
+          <article class="rcard" data-tags="foto kucuk" data-star="5" data-help="26" data-date="5">
+            <div class="who"><img class="av" src="assets/img/av-elif.jpg" alt=""><div><b>Elif Y.</b><small>İstanbul · 5 gün önce</small></div></div><span class="stars">★★★★★</span>
+            <h4>Tablet kavgası çok azaldı</h4>
+            <p>Tamamen bitti diyemem ama akşamları tablet yerine “anne prenses çizdireceğim” diye koşuyor. En son “dondurma yiyen bir zürafa” istedi, gerçekten çizdi 😄 Kalemler de kutudan çıktı, ayrıca bir şey almadık.</p>
+            <div class="shots"><img src="assets/img/ugc-dolap.jpg" alt="Müşteri fotoğrafı" loading="lazy"></div>
+            <div class="meta"><span>Renk: Pembe</span><span>Kızı: 5 yaş</span><span class="ver">✔ Doğrulanmış alıcı</span><button class="help">👍 Faydalı (<b>26</b>)</button></div>
+          </article>
+          <article class="rcard" data-tags="buyuk" data-star="5" data-help="18" data-date="12">
+            <div class="who"><span class="av" style="background:#1462FF">GY</span><div><b>Gökhan Y.</b><small>Kocaeli · 12 gün önce</small></div></div><span class="stars">★★★★★</span>
+            <h4>Uzun yolda kurtarıcı oldu</h4>
+            <p>Bayramda Kocaeli'den Malatya'ya arabayla gittik. Telefonun internetini açtık, arka koltukta iki saat boyunca çizdirip boyadı. Tablet hiç çıkmadı.</p>
+            <div class="meta"><span>Renk: Gri</span><span>Oğlu: 6 yaş</span><span class="ver">✔ Doğrulanmış alıcı</span><button class="help">👍 Faydalı (<b>18</b>)</button></div>
+          </article>
+          <article class="rcard" data-tags="hediye kucuk" data-star="5" data-help="15" data-date="20">
+            <div class="who"><img class="av" src="assets/img/av-seda.jpg" alt=""><div><b>Seda Ö.</b><small>Eskişehir · Anaokulu öğretmeni</small></div></div><span class="stars">★★★★★</span>
+            <h4>Sınıfta ödül etiketi olarak kullanıyoruz</h4>
+            <p>Gün sonunda o günün yıldızı istediği çizimi bastırıp boyuyor. Bu haftanın en çok istenen çizimi: uzay gemisi süren kedi. Velilerden de “bunu nereden aldınız” diye soran çok oldu.</p>
+            <div class="meta"><span>Renk: Sarı</span><span>Sınıf: 5 yaş grubu</span><span class="ver">✔ Doğrulanmış alıcı</span><button class="help">👍 Faydalı (<b>15</b>)</button></div>
+          </article>
+        </div>
+        <p id="rempty" style="display:none;color:var(--muted);font:600 15px var(--f-ui);padding:20px 0">Bu filtreye uyan yorum bu sayfada yok. Tüm yorumlarda aramayı dene.</p>
+        <div class="rmore"><button class="btn" id="rmoreBtn">Daha fazla yorum göster (1.240)</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 SORU-CEVAP ============ -->
+<section class="sec" id="soru-cevap">
+  <div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow rv">🙋 Ürün soru-cevap</span><h2 class="h-l rv d1" style="margin-top:12px">Başkaları da sordu.</h2></div><p class="lead rv d2">86 sorunun en çok okunanları. Cevapları ekibimiz veriyor.</p></div>
+    <div class="qa-grid">
+      <div class="rv">
+        <div class="qitem"><div class="q">Kızım 3,5 yaşında, kullanabilir mi?</div><div class="a">Önerdiğimiz yaş 4 ve üzeri. Daha küçük çocuklar ebeveyn eşliğinde kullanabilir; ilk başta isteğini söylerken ve etiketi soyarken biraz yardıma ihtiyaç duyabilir.</div><small>Örnek ekibi · 214 kişi faydalı buldu</small></div>
+        <div class="qitem"><div class="q">Fotoğraf makinesi var mı, fotoğraf çekiyor mu?</div><div class="a">Hayır, kamerası yok. Telefonundaki fotoğrafları Türkçe uygulama üzerinden etikete basabilirsin. Odak noktamız çocuğun kendi hayal ettiği çizimler.</div><small>Örnek ekibi · 187 kişi faydalı buldu</small></div>
+        <div class="qitem"><div class="q">Wi-Fi olmadan arabada kullanabilir miyiz?</div><div class="a">Yapay zekâ özellikleri internet ister. Arabada telefonunun hotspot'unu açman yeterli; çizim başına çok az veri harcar.</div><small>Örnek ekibi · 142 kişi faydalı buldu</small></div>
+        <div class="qitem"><div class="q">Yedek etiket rulosu nereden alacağım?</div><div class="a">Kutudan 3 rulo çıkıyor. Yedek rulolar çok yakında sitemizde olacak; e-postanı bırakırsan stoğa girdiği gün haber veriyoruz.</div><small>Örnek ekibi · 121 kişi faydalı buldu</small></div>
+        <div class="qitem"><div class="q">Hediye olarak göndereceğim, içinden fatura çıkar mı?</div><div class="a">“Hediye paketi” seçeneğini işaretlersen faturada fiyat yazmaz, paket ve not kartı ücretsizdir. Notunu sepette yazabilirsin.</div><small>Örnek ekibi · 96 kişi faydalı buldu</small></div>
+      </div>
+      <aside class="ask rv d1">
+        <h3>Sorunu sor</h3>
+        <p>Genelde 2 saat içinde cevaplıyoruz. Cevap gelince e-posta ile haber veririz.</p>
+        <form id="askForm"><textarea required placeholder="Ör. İki çocuk aynı anda kullanabilir mi?" aria-label="Sorun"></textarea><button class="btn btn-b" type="submit">Soruyu gönder</button></form>
+        <small>Acil mi? <a href="#" style="text-decoration:underline">WhatsApp'tan yaz</a>, 5 dakikada dönelim.</small>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 SSS + POLİTİKALAR ============ -->
+<section class="sec" id="sss" style="background:var(--paper-2)">
+  <div class="wrap faq-grid">
+    <div class="faq-side">
+      <span class="eyebrow rv">❓ Sık sorulanlar</span>
+      <h2 class="h-l rv d1" style="margin-top:12px">Kısa ve net.</h2>
+    </div>
+    <div class="rv d1">
+      <details class="qa" open><summary>Kaç yaş için uygun?<i>+</i></summary><p>4 yaş ve üzeri. En çok 4–10 yaş arası çocuklar seviyor; büyük kardeşler ajanda ve yapılacaklar listesi için kullanıyor.</p></details>
+      <details class="qa"><summary>Türkçe konuşuyor mu?<i>+</i></summary><p>Evet, Türkçe anlar ve Türkçe cevap verir. İstersen İngilizce kelimeler de öğretir.</p></details>
+      <details class="qa"><summary>Şarjı ne kadar gider?<i>+</i></summary><p>1300 mAh dahili bataryası Type-C ile şarj olur. Kullanım süresi baskı sayısına göre değişir; günlük oyun için akşamları şarja takmak yeterli.</p></details>
+      <details class="qa"><summary>Siparişim ne zaman gelir?<i>+</i></summary><p>Hafta içi saat 16:00'ya kadar verilen siparişler aynı gün kargoya verilir. Teslimat çoğu ile 1–3 iş günü sürer.</p></details>
+      <details class="qa"><summary>Beğenmezsem iade edebilir miyim?<i>+</i></summary><p>Evet. Teslimattan itibaren 14 gün içinde ücretsiz iade edebilirsin; kargo ücreti bizden.</p></details>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="pol">
+      <div class="rv"><span>🚚</span><h3>Ücretsiz ve hızlı kargo</h3><p>Tüm Türkiye'ye ücretsiz. 16:00'ya kadar verilen siparişler aynı gün kargoda.</p></div>
+      <div class="rv d1"><span>↩️</span><h3>14 gün ücretsiz iade</h3><p>Çocuğun sevmezse 14 gün içinde ücretsiz iade. Soru sormadan.</p></div>
+      <div class="rv d2"><span>🛡️</span><h3>2 yıl garanti</h3><p>Arıza durumunda Türkiye'deki destek ekibimiz değişim ya da onarımla ilgilenir.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 SON ÇAĞRI ============ -->
+<section class="final scribble">
+  <div class="wrap">
+    <div>
+      <h2 class="h-l">Hayal gücü<br><span class="outline o-yellow">kâğıda dökülsün.</span></h2>
+      <p class="lead" id="finalLead">Bugün sipariş ver, birkaç gün içinde ilk etiketini boyasın.</p>
+      <div class="final-ctas"><button class="btn btn-y" id="finalAdd">Sepete ekle · 2.499 TL</button><a href="#urun" class="btn">Rengini seç ↑</a></div>
+      <small>🚚 Ücretsiz kargo · ↩️ 14 gün ücretsiz iade · 🚪 Kapıda ödeme · 🛡️ 2 yıl garanti</small>
+    </div>
+    <div class="trio-img"><img src="assets/img/urun-pembe.webp" alt=""><img src="assets/img/urun-sari.webp" alt=""><img src="assets/img/urun-gri.webp" alt=""></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-about">
+        <a href="index.html" class="logo"><span class="o">o<i></i><i></i></span>rnek</a>
+        <p>Çocukların hayal gücünü kâğıda döken küçük yazıcı. Tablete değil, kaleme uzanan eller için.</p>
+        <div class="f-contact"><span>📞 0850 000 00 00</span><span>✉️ merhaba@ornek.com.tr</span><span>🕘 Hafta içi 09:00–18:00</span></div>
+      </div>
+      <details class="fcol" open><summary><h5>Alışveriş</h5></summary><ul><li><a href="urun.html">OXPI Etiket Yazıcı</a></li><li><a href="#">Yedek etiket (yakında)</a></li><li><a href="index.html#hediye">Hediye rehberi</a></li><li><a href="#">Okullar için</a></li></ul></details>
+      <details class="fcol" open><summary><h5>Yardım</h5></summary><ul><li><a href="#">Kargo takibi</a></li><li><a href="#">İade ve değişim</a></li><li><a href="#">Garanti</a></li><li><a href="#sss">Sık sorulanlar</a></li><li><a href="#">İletişim</a></li></ul></details>
+      <details class="fcol" open><summary><h5>Yasal</h5></summary><ul><li><a href="#">KVKK aydınlatma metni</a></li><li><a href="#">Mesafeli satış sözleşmesi</a></li><li><a href="#">Ön bilgilendirme formu</a></li><li><a href="#">Çerez politikası</a></li></ul></details>
+    </div>
+    <div class="f-bottom">
+      <div class="paylogos"><span>VISA</span><span>Mastercard</span><span>TROY</span><span>iyzico</span><span>Kapıda ödeme</span></div>
+      <div class="bye"><img src="assets/img/urun-sari.webp" alt="">görüşmek üzere!</div>
+      <small>© 2026 Örnek · Tüm hakları saklıdır</small>
+    </div>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar" aria-label="Hızlı satın al">
+  <div class="mdots" role="group" aria-label="Renk seç"><button class="act" data-color="sari" style="--c:var(--yellow)" aria-label="Sarı"></button><button data-color="pembe" style="--c:var(--pink)" aria-label="Pembe"></button><button data-color="gri" style="--c:var(--grey)" aria-label="Gri"></button></div>
+  <div class="t"><span id="mbarName">Civciv Sarı</span><b>2.499 TL</b></div>
+  <button class="btn btn-o btn-s" id="mbarAdd">Sepete ekle</button>
+</div>
+<div class="toast" id="toast"></div>
+<div class="lightbox" id="lightbox"><img alt=""></div>
+
+<script>
+const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMob=()=>matchMedia('(max-width:720px)').matches;
+
+/* ---------- görünme animasyonları ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+$$('.rv,.mark').forEach(el=>io.observe(el));
+
+/* ---------- videolar ---------- */
+const vio=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;
+  if(e.isIntersecting){ if(v.dataset.src&&!v.src) v.src=v.dataset.src; if(!reduce&&v.dataset.auto!=='0') v.play().catch(()=>{}) } else if(!v.paused) v.pause() }),{threshold:.35});
+$$('video[data-src]').forEach(v=>vio.observe(v));
+$$('.snd').forEach(b=>b.addEventListener('click',e=>{ e.stopPropagation(); const v=document.getElementById(b.dataset.for); const on=v.muted;
+  $$('video').forEach(o=>o.muted=true); $$('.snd').forEach(o=>o.classList.remove('is-on'));
+  if(on){ if(v.dataset.src&&!v.src) v.src=v.dataset.src; v.muted=false; v.currentTime=0; v.play(); b.classList.add('is-on') } }));
+
+/* ---------- galeri ---------- */
+const NAMES={sari:'Civciv Sarı',pembe:'Şeker Pembe',gri:'Bulut Gri'}, ACC={sari:'Sarıyı',pembe:'Pembeyi',gri:'Griyi'};
+let color='sari';
+const G=()=>[
+  {t:'img',src:`assets/img/g-${color}.jpg`,cap:NAMES[color]},
+  {t:'vid',src:'assets/video/hero-akis.mp4',poster:'assets/video/hero-akis.jpg',cap:'20 sn video · sesli'},
+  {t:'img',src:'assets/img/g-kapak.jpg',cap:'Kutu içeriği'},
+  {t:'img',src:'assets/img/g-4adim.jpg',cap:'4 adımda etiket'},
+  {t:'img',src:'assets/img/g-sohbet.jpg',cap:'Sesli sohbet'},
+  {t:'img',src:'assets/img/g-olculer.jpg',cap:'Ölçüler · avuç içi kadar'},
+  {t:'img',src:'assets/img/g-kullanim.jpg',cap:'Kullanım alanları'},
+  {t:'img',src:'assets/img/g-uygulama.jpg',cap:'Türkçe uygulama'},
+  {t:'img',src:'assets/img/ugc-buzdolabi.jpg',cap:'📷 Müşteri fotoğrafı',ugc:1}
+];
+let gi=0;
+function buildGallery(){
+  const items=G(), th=$('#pgThumbs'), tr=$('#pgTrack'), dots=$('#pgDots');
+  th.innerHTML=items.map((x,i)=>`<button role="tab" class="${i===gi?'act ':''}${x.t==='vid'?'play':''}${x.ugc?' ugc':''}" data-i="${i}" aria-label="${x.cap}"><img src="${x.t==='vid'?x.poster:x.src}" alt=""></button>`).join('');
+  tr.innerHTML=items.map(x=>x.t==='vid'?`<div><video src="${x.src}" poster="${x.poster}" playsinline controls preload="none"></video></div>`:`<div><img src="${x.src}" alt="${x.cap}" loading="lazy"></div>`).join('');
+  dots.innerHTML=items.map((_,i)=>`<i class="${i===0?'act':''}"></i>`).join('');
+  $$('button',th).forEach(b=>b.addEventListener('click',()=>show(+b.dataset.i)));
+}
+function show(i){
+  const items=G(); gi=(i+items.length)%items.length; const x=items[gi], m=$('#pgMain'), img=$('#pgImg'), vid=$('#pgVid');
+  $$('#pgThumbs button').forEach((b,j)=>b.classList.toggle('act',j===gi));
+  m.classList.remove('zoom');
+  if(x.t==='vid'){ m.classList.add('is-video'); if(!vid.src) vid.src=x.src; vid.play().catch(()=>{}) }
+  else { m.classList.remove('is-video'); vid.pause(); img.style.opacity=0; setTimeout(()=>{img.src=x.src; img.alt=x.cap; img.onload=()=>img.style.opacity=1},120) }
+  $('#pgCap').textContent=x.cap;
+}
+buildGallery();
+const pm=$('#pgMain');
+pm.addEventListener('click',e=>{ if(pm.classList.contains('is-video')) return; pm.classList.toggle('zoom') });
+pm.addEventListener('mousemove',e=>{ if(!pm.classList.contains('zoom')) return; const r=pm.getBoundingClientRect(); $('#pgImg').style.transformOrigin=`${(e.clientX-r.left)/r.width*100}% ${(e.clientY-r.top)/r.height*100}%` });
+pm.addEventListener('mouseleave',()=>pm.classList.remove('zoom'));
+addEventListener('keydown',e=>{ if(e.target.closest('textarea,input,select')) return; if(e.key==='ArrowRight') show(gi+1); if(e.key==='ArrowLeft') show(gi-1) });
+const track=$('#pgTrack');
+track.addEventListener('scroll',()=>{ const i=Math.round(track.scrollLeft/track.clientWidth); $$('#pgDots i').forEach((d,j)=>d.classList.toggle('act',j===i)); $('#pgCount').textContent=`${i+1} / ${G().length}`;
+  $$('video',track).forEach(v=>{ if(!v.paused) v.pause() }) },{passive:true});
+
+/* ---------- renk ---------- */
+function setColor(c){
+  color=c;
+  $$('#colors button').forEach(b=>b.classList.toggle('act',b.dataset.color===c));
+  $$('.mdots button').forEach(b=>b.classList.toggle('act',b.dataset.color===c));
+  $('#colorName').textContent=NAMES[c]; $('#mbarName').textContent=NAMES[c]; $('#snName').textContent=NAMES[c];
+  $('#snImg').src=`assets/img/urun-${c}.webp`;
+  $('#addBtn').textContent=`${ACC[c]} sepete ekle`;
+  const first=$('#pgThumbs button img'); if(first) first.src=`assets/img/g-${c}.jpg`;
+  const t0=$('#pgTrack img'); if(t0) t0.src=`assets/img/g-${c}.jpg`;
+  if(isMob()) track.scrollTo({left:0,behavior:'smooth'}); else show(0);
+}
+$$('#colors button,.mdots button').forEach(b=>b.addEventListener('click',()=>setColor(b.dataset.color)));
+
+/* ---------- adet ---------- */
+let qty=1; const qo=$('#qty');
+$('#qPlus').onclick=()=>{ qty=Math.min(5,qty+1); qo.textContent=qty };
+$('#qMinus').onclick=()=>{ qty=Math.max(1,qty-1); qo.textContent=qty };
+
+/* ---------- kargo: bugün kargoda + teslim tarihi ---------- */
+function shipInfo(){
+  const now=new Date(), d=now.getDay(), cut=new Date(now); cut.setHours(16,0,0,0);
+  const work=x=>x.getDay()!==0&&x.getDay()!==6;
+  let ship=new Date(now), today=work(now)&&now<cut;
+  if(!today){ do{ ship.setDate(ship.getDate()+1) }while(!work(ship)) }
+  const addWork=(x,n)=>{ const r=new Date(x); while(n>0){ r.setDate(r.getDate()+1); if(work(r)) n-- } return r };
+  const a=addWork(ship,1), b=addWork(ship,3);
+  const f=x=>x.toLocaleDateString('tr-TR',{day:'numeric',month:'long',weekday:'short'});
+  $('#eta').textContent=`${f(a)} – ${f(b)}`;
+  $('#finalLead').textContent=`Şimdi sipariş ver, ${a.toLocaleDateString('tr-TR',{day:'numeric',month:'long'})} gibi ilk etiketini boyasın.`;
+  if(today){ const ms=cut-now, h=Math.floor(ms/36e5), m=Math.floor(ms%36e5/6e4);
+    $('#cutText').textContent='Bugün kargoda'; $('#cutLeft').textContent=`${h>0?h+' sa ':''}${m} dk içinde sipariş verirsen` }
+  else { $('#cutText').textContent=`${ship.toLocaleDateString('tr-TR',{weekday:'long'})} kargoda`; $('#cutLeft').textContent='hafta içi 16:00\'ya kadar verilen siparişler aynı gün çıkar' }
+}
+shipInfo(); setInterval(shipInfo,30000);
+
+/* ---------- hediye ---------- */
+const gb=$('#giftbox'), gc=$('#giftChk');
+gc.addEventListener('change',()=>gb.classList.toggle('on',gc.checked));
+$('#giftNote').addEventListener('input',e=>$('#noteLen').textContent=e.target.value.length);
+function giftOn(){ gc.checked=true; gb.classList.add('on'); $('#bb').scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>$('#giftNote').focus({preventScroll:true}),700) }
+$('#giftGo').onclick=giftOn; $$('#giftChips button').forEach(b=>b.onclick=giftOn);
+
+/* ---------- sepet ---------- */
+let cart=0;
+function toast(t){ const el=$('#toast'); el.textContent=t; el.classList.add('on'); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('on'),2600) }
+function confetti(x,y){ if(reduce) return; const em=['⭐','🖍️','🦖','🚀','💛','🎨','✨','🐥'];
+  for(let i=0;i<14;i++){ const s=document.createElement('span'); s.className='confetti'; s.textContent=em[i%em.length]; s.style.left=x+'px'; s.style.top=y+'px'; document.body.appendChild(s);
+    const a=Math.random()*Math.PI*2, d=90+Math.random()*120; requestAnimationFrame(()=>{s.style.transform=`translate(${Math.cos(a)*d}px,${Math.sin(a)*d-60}px) rotate(${Math.random()*360}deg)`;s.style.opacity=0}); setTimeout(()=>s.remove(),1200) } }
+function add(e){ cart+=qty; const b=$('#cartCount'); b.textContent=cart; b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop');
+  toast(`${qty>1?qty+' × ':''}${NAMES[color]} OXPI sepete eklendi${gc.checked?' · 🎁 hediye paketli':''} 🎉`); confetti(e.clientX,e.clientY) }
+['addBtn','snAdd','mbarAdd','finalAdd'].forEach(id=>$('#'+id).addEventListener('click',add));
+$('#nowBtn').addEventListener('click',e=>{ add(e); setTimeout(()=>toast('Ödeme sayfasına yönlendiriliyorsun… (sunum)'),900) });
+
+/* ---------- yapışkan çubuklar + alt menü vurgusu ---------- */
+let addVis=true;
+new IntersectionObserver(es=>{ addVis=es[0].isIntersecting; sticky() }).observe($('#addBtn'));
+function sticky(){
+  const past=$('#addBtn').getBoundingClientRect().bottom<0;
+  $('#snBuy').classList.toggle('on',past);
+  $('#mbar').classList.toggle('show',!addVis && $('.final').getBoundingClientRect().top>innerHeight*.7);
+}
+const secs=$$('#snav a').map(a=>$(a.getAttribute('href')));
+function spy(){ let k=-1; secs.forEach((s,i)=>{ if(s && s.getBoundingClientRect().top<180) k=i });
+  $$('#snav a').forEach((a,i)=>a.classList.toggle('act',i===k));
+  const act=$('#snav a.act'); if(act&&isMob()){ const n=$('#snav'); const l=act.offsetLeft-n.clientWidth/2+act.clientWidth/2; if(Math.abs(n.scrollLeft-l)>40) n.scrollTo({left:l,behavior:'smooth'}) } }
+addEventListener('scroll',()=>{ $('#top').classList.toggle('sc',scrollY>10); sticky(); spy() },{passive:true});
+
+/* ---------- yorumlar: filtre, sıralama, faydalı ---------- */
+const cards=$$('#rlist .rcard');
+let rf='all', rstar=0;
+function applyR(){ let n=0;
+  cards.forEach(c=>{ const tags=c.dataset.tags.split(' '); const okF=rf==='all'||tags.includes(rf); const okS=!rstar||+c.dataset.star===rstar; c.hidden=!(okF&&okS); if(!c.hidden) n++ });
+  $('#rempty').style.display=n?'none':'block' }
+$$('#rfilters button').forEach(b=>b.onclick=()=>{ rf=b.dataset.f; $('#rlist').classList.toggle('all',rf!=='all'); rstar=0; $$('#dist button').forEach(x=>x.classList.remove('act')); $$('#rfilters button').forEach(x=>x.classList.toggle('act',x===b)); applyR() });
+$$('#dist button').forEach(b=>b.onclick=()=>{ const s=+b.dataset.star; rstar=rstar===s?0:s; $('#rlist').classList.toggle('all',!!rstar); $$('#dist button').forEach(x=>x.classList.toggle('act',+x.dataset.star===rstar)); applyR(); $('#rlist').scrollIntoView({behavior:'smooth',block:'start'}) });
+$('#rsort').onchange=e=>{ const k=e.target.value==='new'?'date':'help'; const L=$('#rlist'); cards.slice().sort((a,b)=>k==='date'?a.dataset.date-b.dataset.date:b.dataset.help-a.dataset.help).forEach(c=>L.appendChild(c)) };
+$$('.help').forEach(h=>h.onclick=()=>{ const b=$('b',h); const on=h.classList.toggle('on'); b.textContent=+b.textContent+(on?1:-1) });
+$$('[data-filter="foto"]').forEach(a=>a.addEventListener('click',()=>$('#rfilters [data-f="foto"]').click()));
+cards.forEach((c,i)=>{ if(i>(isMob()?2:3)) c.classList.add('later') });
+$('#rmoreBtn').onclick=()=>{ const L=$('#rlist'); if(!L.classList.contains('all')){ L.classList.add('all'); $('#rmoreBtn').textContent='Tüm yorumları gör (1.248)' } else toast('Tüm yorumlar ayrı sayfada açılacak (sunum)') };
+$('#writeRev').onclick=()=>toast('Yorum yazma ekranı açılacak (sunum)');
+const lb=$('#lightbox'); $$('.shots img').forEach(i=>i.onclick=()=>{ $('img',lb).src=i.src; lb.classList.add('on') }); lb.onclick=()=>lb.classList.remove('on');
+
+/* ---------- soru formu ---------- */
+$('#askForm').addEventListener('submit',e=>{ e.preventDefault(); e.target.reset(); toast('Sorun bize ulaştı! Cevaplayınca haber vereceğiz ✉️') });
+
+/* ---------- footer ---------- */
+if(isMob()){ $$('.fcol').forEach(d=>d.removeAttribute('open')); $$('.spec details').forEach((d,i)=>{ if(i>0) d.removeAttribute('open') }); $$('#sss .qa').forEach(d=>d.removeAttribute('open')) }
+</script>
+</body>
+</html>
