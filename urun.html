@@ -422,6 +422,7 @@
   <div class="wrap nav">
     <a href="index.html" class="logo" aria-label="Örnek ana sayfa"><span class="o">o<i></i><i></i></span>rnek<small>OXPI</small></a>
     <nav class="menu" aria-label="Ana menü">
+      <a href="urun.html" class="prod-link" aria-current="page"><span>🐥</span>Ürün</a>
       <a href="index.html#nasil"><span>🖍️</span>Nasıl çalışır</a>
       <a href="index.html#dene"><span>🎨</span>Hemen dene</a>
       <a href="#yorumlar"><span>💬</span>Aileler ne diyor</a>
@@ -984,8 +985,18 @@ const lb=$('#lightbox'); $$('.shots img').forEach(i=>i.onclick=()=>{ $('img',lb)
 /* ---------- soru formu ---------- */
 $('#askForm').addEventListener('submit',e=>{ e.preventDefault(); e.target.reset(); toast('Sorun bize ulaştı! Cevaplayınca haber vereceğiz ✉️') });
 
+/* ---------- ana sayfadan gelen renk ---------- */
+(()=>{ const r=new URLSearchParams(location.search).get('renk'); if(NAMES[r]&&r!=='sari') setColor(r) })();
+
 /* ---------- footer ---------- */
 if(isMob()){ $$('.fcol').forEach(d=>d.removeAttribute('open')); $$('.spec details').forEach((d,i)=>{ if(i>0) d.removeAttribute('open') }); $$('#sss .qa').forEach(d=>d.removeAttribute('open')) }
+
+/* ---------- mobil menü ---------- */
+(()=>{ const hd=document.getElementById('top'), bg=hd.querySelector('.burger');
+  bg.setAttribute('aria-expanded','false');
+  bg.addEventListener('click',()=>{ const o=hd.classList.toggle('open'); bg.setAttribute('aria-expanded',o) });
+  hd.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>{ hd.classList.remove('open'); bg.setAttribute('aria-expanded','false') }));
+  addEventListener('keydown',e=>{ if(e.key==='Escape') hd.classList.remove('open') }); })();
 </script>
 </body>
 </html>

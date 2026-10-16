@@ -34,6 +34,7 @@
   <div class="wrap nav">
     <a href="#" class="logo" aria-label="Örnek ana sayfa"><span class="o">o<i></i><i></i></span>rnek<small>OXPI</small></a>
     <nav class="menu" aria-label="Ana menü">
+      <a href="urun.html" class="prod-link"><span>🐥</span>Ürün</a>
       <a href="#nasil"><span>🖍️</span>Nasıl çalışır</a>
       <a href="#dene"><span>🎨</span>Hemen dene</a>
       <a href="#yorumlar"><span>💬</span>Aileler ne diyor</a>
@@ -324,12 +325,12 @@
         <button data-img="assets/img/g-olculer.jpg"><img src="assets/img/g-olculer.jpg" alt="Ölçüler"></button>
         <button data-img="assets/img/g-uygulama.jpg"><img src="assets/img/g-uygulama.jpg" alt="Uygulama"></button>
       </div>
-      <div class="main-img"><span class="hot">🔥 Bu hafta 214 kişi aldı</span><img id="mainImg" src="assets/img/g-sari.jpg" alt="OXPI Yapay Zekâ Etiket Yazıcı"></div>
+      <div class="main-img"><span class="hot">🔥 Bu hafta 214 kişi aldı</span><img id="mainImg" src="assets/img/g-sari.jpg" alt="OXPI Yapay Zekâlı Çocuk Yazıcısı"><span class="go">Ürün sayfası ↗</span></div>
       <div class="gdots" id="gdots" aria-hidden="true"></div>
     </div>
     <div class="info">
       <div class="rate rv"><span class="stars">★★★★★</span> 4,9 · <a href="#yorumlar">1.248 değerlendirme</a></div>
-      <h2 class="rv d1">OXPI Yapay Zekâlı<br> Çocuk Yazıcısı</h2>
+      <h2 class="rv d1"><a href="urun.html" class="pdp-title" id="pdpTitle">OXPI Yapay Zekâlı<br> Çocuk Yazıcısı</a></h2>
       <p class="sub rv d1">Konuşan, çizen ve yapışkanlı etikete basan boyama arkadaşı · 4+ yaş</p>
       <div class="price rv d2"><b>2.499 TL</b><s>3.299 TL</s><span class="off">800 TL indirim</span></div>
       <div class="pay rv d2"><span>💳 Peşin fiyatına 3 × 833 TL</span><span>🚪 Kapıda ödeme</span></div>
@@ -684,7 +685,9 @@ const tr=$('#track'); $('#next').onclick=()=>tr.scrollBy({left:540,behavior:'smo
 
 /* ---------- satın al: renk + galeri ---------- */
 const NAMES={sari:'Sarıyı',pembe:'Pembeyi',gri:'Griyi'};
+const curColor=()=>$('#colors .act').dataset.color, pdpUrl=()=>`urun.html?renk=${curColor()}`;
 function setColor(c){
+  $('#pdpTitle').href=`urun.html?renk=${c}`; $$('.pdp-link').forEach(a=>a.href=`urun.html?renk=${c}`);
   const b=$(`#colors [data-color="${c}"]`); $$('#colors button').forEach(x=>x.classList.toggle('act',x===b));
   $('#colorName').textContent=b.dataset.name; $('#addBtn').textContent=`${NAMES[c]} sepete ekle`;
   $$('.mdots button').forEach(x=>x.classList.toggle('act',x.dataset.color===c)); $('#mbarName').textContent=b.dataset.name;
@@ -698,10 +701,10 @@ function stepImg(d){ const i=thumbs.findIndex(t=>t.classList.contains('act')); s
 (()=>{ const mi=$('.main-img'); let x0=null;
   mi.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
   mi.addEventListener('touchend',e=>{ if(x0==null) return; const dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40) stepImg(dx<0?1:-1); x0=null });
-  mi.addEventListener('click',()=>{ if(matchMedia('(max-width:720px)').matches) stepImg(1) }); })();
+  mi.addEventListener('click',()=>{ location.href=pdpUrl() }); })();
 $$('#colors button').forEach(b=>b.addEventListener('click',()=>setColor(b.dataset.color)));
 $$('#thumbs button').forEach(b=>b.addEventListener('click',()=>showImg(b)));
-$$('.prod').forEach(p=>p.addEventListener('click',()=>{ setColor(p.dataset.color); $('#satin-al').scrollIntoView({behavior:'smooth'}) }));
+$$('.prod').forEach(p=>p.addEventListener('click',()=>{ location.href=`urun.html?renk=${p.dataset.color}` }));
 
 /* ---------- sepet ---------- */
 let cart=0;
@@ -716,6 +719,13 @@ $('#addBtn').addEventListener('click',addToCart); $('#mbarAdd').addEventListener
 
 /* ---------- footer: mobilde kapalı açılır başlıklar ---------- */
 if(matchMedia('(max-width:720px)').matches) $$('.fcol').forEach(d=>d.removeAttribute('open'));
+
+/* ---------- mobil menü ---------- */
+(()=>{ const hd=document.getElementById('top'), bg=hd.querySelector('.burger');
+  bg.setAttribute('aria-expanded','false');
+  bg.addEventListener('click',()=>{ const o=hd.classList.toggle('open'); bg.setAttribute('aria-expanded',o) });
+  hd.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>{ hd.classList.remove('open'); bg.setAttribute('aria-expanded','false') }));
+  addEventListener('keydown',e=>{ if(e.key==='Escape') hd.classList.remove('open') }); })();
 </script>
 </body>
 </html>
