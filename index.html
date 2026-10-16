@@ -594,6 +594,135 @@ footer{padding:80px 0 40px;background:var(--paper)}
   .desk{height:auto}
   .sheet{height:330px;flex:none}
 }
+
+/* ================= MOBİL UX v2 ================= */
+.how-cap,.gdots{display:none}
+.fcol summary{list-style:none}
+.fcol summary::-webkit-details-marker{display:none}
+@media (min-width:721px){.fcol summary{pointer-events:none}}
+@media (max-width:720px){
+  /* 1 · her an satın al */
+  .mbar{padding:8px 8px 8px 12px;gap:10px}
+  .mdots{display:flex;gap:7px}
+  .mdots button{width:26px;height:26px;border-radius:50%;background:var(--c);border:2px solid var(--ink);transition:transform .2s}
+  .mdots button.act{transform:scale(1.12);box-shadow:0 0 0 2px #fff,0 0 0 4px var(--ink)}
+  .mbar .t{font:700 12px/1.15 var(--f-ui);color:var(--muted)}
+  .mbar .t b{font-size:20px;color:var(--ink)}
+  .mbar .btn{height:46px;padding:0 16px;font-size:15.5px}
+
+  /* 2 · Sen de dene: tek sahne */
+  .demo-grid{position:relative}
+  .demo-left{height:560px;padding:14px;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;gap:0}
+  .demo-col{display:block;min-width:0}
+  .chips-t{display:none}
+  .chips{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -14px;padding:2px 14px 10px}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none}
+  .talk{position:absolute;left:0;right:0;top:58px;z-index:4;min-height:0;display:block;overflow:visible}
+  .talk .msg{display:none;max-width:90%}
+  .talk .msg:last-child{display:block}
+  .talk .msg.me:last-child{margin-left:auto}
+  .demo-dev{height:auto;min-height:0}
+  .device{transform:scale(.84)}
+  .desk{position:absolute;left:0;right:0;top:62px;bottom:0;height:auto;z-index:5;border-radius:24px;padding:14px;box-shadow:none;opacity:0;pointer-events:none;transform:translateY(18px);transition:opacity .45s,transform .45s cubic-bezier(.3,1.4,.5,1)}
+  .demo-grid:not(.painting) .desk{opacity:0!important;pointer-events:none;transform:translateY(18px)!important}
+  .demo-grid.painting .desk{opacity:1;pointer-events:auto;transform:none}
+  .desk-top{margin-bottom:8px}
+  .desk-top h3{font-size:20px}
+  .desk-top p{font-size:18px}
+  .sheet{flex:1 1 0;height:auto;min-height:0}
+  .markers{margin-top:10px;gap:6px}
+  .mk{width:26px;height:48px}
+  .desk-actions{margin-top:10px}
+  .desk-actions .btn{height:40px;font-size:14.5px;padding:0 14px}
+
+  /* 3 · Satın al: buton ilk ekranda */
+  .buy-grid{display:flex;flex-direction:column;align-items:stretch;gap:0}
+  .info{display:contents}
+  .info .rate{order:1}.info h2{order:2}.info .sub{order:3}.price{order:4}.pay{order:5}
+  .gal{order:6;margin-top:16px;position:static}
+  .o-col{order:7}.colors{order:8}.buy-ctas{order:9}.gift-line{order:10}.o-box{order:11}.box{order:12}.assure{order:13}
+  .thumbs{display:none}
+  .main-img{aspect-ratio:4/3;touch-action:pan-y}
+  .gdots{display:flex;justify-content:center;gap:6px;margin-top:10px}
+  .gdots i{width:7px;height:7px;border-radius:4px;background:#D9D2C2;transition:all .25s}
+  .gdots i.act{width:20px;background:var(--ink)}
+  .info h2{font-size:30px}
+  .info h2 br{display:none}
+  .price{margin:12px 0 4px}
+  .price b{font-size:34px}
+  .colors button{padding:8px 6px 10px}
+  .colors button img{height:52px}
+  .buy-ctas{grid-template-columns:1fr auto}
+  .buy-ctas .btn{height:56px;font-size:17px}
+  .assure{grid-template-columns:1fr 1fr}
+
+  /* 4 · 4 adım: adımlar videonun üstünde */
+  .how-grid{display:flex;flex-direction:column;gap:0}
+  .how-txt{display:contents}
+  .how-txt .eyebrow{order:1}
+  .how-txt h2{order:2;margin-bottom:18px}
+  .how .vcard{order:3;width:66%;margin:0 auto}
+  .steps{order:4}
+  .how-cap{display:block;position:absolute;left:16px;right:16px;bottom:16px;z-index:2;background:rgba(255,255,255,.96);border:2px solid var(--ink);border-radius:14px;padding:8px 11px;font:600 13px/1.25 var(--f-ui)}
+  .how-cap b{display:block;font:800 18px/1.1 var(--f-display)}
+  .how .snd{top:30px;bottom:auto;right:14px;height:32px;font-size:12px;padding:0 10px}
+  .steps{grid-template-columns:repeat(4,1fr);gap:8px;margin-top:20px}
+  .step{grid-template-columns:1fr;justify-items:center;text-align:center;padding:8px 4px;gap:6px;border-radius:16px}
+  .step .num{width:46px;height:46px;font-size:21px;border-radius:14px}
+  .step h3{font-size:14.5px}
+  .step h3 em,.step p,.step .quote-chip{display:none}
+  .step.act{transform:none;box-shadow:3px 3px 0 var(--ink)}
+
+  /* 5 · Sadece çizmez: yana kaydır */
+  .m-hide{display:none}
+  .more-head{margin-bottom:22px}
+  .more-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -16px;padding:6px 16px 22px;scrollbar-width:none}
+  .more-grid::-webkit-scrollbar{display:none}
+  .mcard{flex:0 0 76%;scroll-snap-align:center}
+  .mcard .chat p{font-size:14px}
+
+  /* 6 · Hediye: video küçük, metin yanında */
+  .gift-grid{grid-template-columns:118px 1fr;gap:10px 16px;align-items:start}
+  .gift-txt{display:contents}
+  .gift .vcard{grid-column:1;grid-row:1/span 3;width:118px;height:auto;padding:5px;border-radius:18px;box-shadow:4px 4px 0 var(--ink);transform:rotate(-3deg)}
+  .gift .vcard video{border-radius:13px}
+  .gift .vcard .bow{font-size:32px;top:-18px;right:-14px}
+  .gift-txt .eyebrow{grid-column:2}
+  .gift-txt h2{grid-column:2;margin-top:0!important;font-size:25px}
+  .gift-txt .lead{grid-column:2;margin-top:0!important;font-size:15px}
+  .occ{grid-column:1/-1;flex-wrap:nowrap;overflow-x:auto;margin:12px -16px 4px;padding:2px 16px 8px;scrollbar-width:none}
+  .occ::-webkit-scrollbar{display:none}
+  .occ span{flex:none;height:40px;font-size:14.5px}
+  .unbox{grid-column:1/-1;grid-template-columns:repeat(3,1fr);gap:8px}
+  .unbox div{padding:12px 10px}
+  .unbox b{font-size:30px}
+  .unbox p{font-size:13.5px}
+  .unbox small{display:none}
+
+  /* 7 · Footer: açılır başlıklar */
+  .f-grid{grid-template-columns:1fr;gap:0}
+  .f-about{margin-bottom:18px}
+  .fcol{border-top:2px solid var(--line)}
+  .fcol summary{cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+  .fcol summary h5{margin:0}
+  .fcol summary::after{content:"+";font:800 22px/1 var(--f-ui)}
+  .fcol[open] summary::after{content:"–"}
+  .fcol ul{padding-bottom:16px}
+  .f-bottom{margin-top:24px}
+
+  /* sıkılaştırmalar */
+  .moments{flex-wrap:nowrap;overflow-x:auto;margin:22px -16px 0;padding:0 16px 6px;scrollbar-width:none}
+  .moments::-webkit-scrollbar{display:none}
+  .moments span{flex:none}
+  .phones{height:400px}
+  .phone{width:188px}
+  .phone .cap{font-size:12px;padding:6px 9px;top:10px;left:10px;right:10px}
+  .board .vcard{width:60%}
+  .score{padding:14px 18px;gap:14px}
+  .score b{font-size:46px}
+  .score .bars{display:none}
+}
 @media (min-width:721px){.pins-m{display:contents}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
@@ -697,8 +826,9 @@ footer{padding:80px 0 40px;background:var(--paper)}
       <div class="seg" id="howSeg"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
       <video id="howVid" data-src="assets/video/adim-akis.mp4" poster="assets/video/adim-akis.jpg" muted loop playsinline preload="none"></video>
       <button class="snd" data-for="howVid"><span class="off">🔇 Sesi aç</span><span class="on">🔊 Sesi kapat</span></button>
+      <div class="how-cap" id="howCap" aria-live="polite"></div>
     </div>
-    <div>
+    <div class="how-txt">
       <span class="eyebrow rv">🖍️ Nasıl çalışır?</span>
       <h2 class="h-l rv d1" style="margin-top:12px">4 adımda <span class="mark">kendi etiketi.</span></h2>
       <div class="steps" id="steps">
@@ -784,7 +914,7 @@ footer{padding:80px 0 40px;background:var(--paper)}
         <span class="eyebrow rv">💬 Konuşur, anlatır, öğretir</span>
         <h2 class="h-l rv d1" style="margin-top:12px">Sadece çizmez.<br><span class="outline o-yellow">Sorulara cevap verir.</span></h2>
       </div>
-      <p class="lead rv d2" style="max-width:380px">“Neden?” sorularının bitmediği yaşlarda en sabırlı arkadaş. Türkçe konuşur, İngilizce kelime öğretir, birlikte sayar.</p>
+      <p class="lead rv d2 m-hide" style="max-width:380px">“Neden?” sorularının bitmediği yaşlarda en sabırlı arkadaş. Türkçe konuşur, İngilizce kelime öğretir, birlikte sayar.</p>
     </div>
     <div class="more-grid">
       <article class="mcard rv d1" style="--c:#9CC2FF">
@@ -906,22 +1036,23 @@ footer{padding:80px 0 40px;background:var(--paper)}
         <button data-img="assets/img/g-uygulama.jpg"><img src="assets/img/g-uygulama.jpg" alt="Uygulama"></button>
       </div>
       <div class="main-img"><span class="hot">🔥 Bu hafta 214 kişi aldı</span><img id="mainImg" src="assets/img/g-sari.jpg" alt="OXPI Yapay Zekâ Etiket Yazıcı"></div>
+      <div class="gdots" id="gdots" aria-hidden="true"></div>
     </div>
     <div class="info">
       <div class="rate rv"><span class="stars">★★★★★</span> 4,9 · <a href="#yorumlar">1.248 değerlendirme</a></div>
-      <h2 class="rv d1">OXPI Yapay Zekâ<br>Etiket Yazıcı</h2>
+      <h2 class="rv d1">OXPI Yapay Zekâ<br> Etiket Yazıcı</h2>
       <p class="sub rv d1">Konuşan, çizen ve yapışkanlı etikete basan boyama arkadaşı · 4+ yaş</p>
       <div class="price rv d2"><b>2.499 TL</b><s>3.299 TL</s><span class="off">800 TL indirim</span></div>
       <div class="pay rv d2"><span>💳 Peşin fiyatına 3 × 833 TL</span><span>🚪 Kapıda ödeme</span></div>
 
-      <div class="opt-label rv d3">Renk <em id="colorName">Civciv Sarı</em></div>
+      <div class="opt-label o-col rv d3">Renk <em id="colorName">Civciv Sarı</em></div>
       <div class="colors rv d3" id="colors">
         <button class="act" data-color="sari" data-name="Civciv Sarı" style="--c:var(--yellow-l)"><img src="assets/img/urun-sari.webp" alt="">Sarı</button>
         <button data-color="pembe" data-name="Şeker Pembe" style="--c:var(--pink-l)"><img src="assets/img/urun-pembe.webp" alt="">Pembe</button>
         <button data-color="gri" data-name="Bulut Gri" style="--c:#EEF0F4"><img src="assets/img/urun-gri.webp" alt="">Gri</button>
       </div>
 
-      <div class="opt-label rv">Kutudan çıkanlar</div>
+      <div class="opt-label o-box rv">Kutudan çıkanlar</div>
       <div class="box rv">
         <div><span>🐥</span>OXPI cihaz</div>
         <div><span>🧻</span>3 rulo etiket</div>
@@ -1010,7 +1141,7 @@ footer{padding:80px 0 40px;background:var(--paper)}
 <section class="gift tear-tb" id="hediye">
   <div class="wrap gift-grid">
     <div class="vcard rv"><span class="bow">🎀</span><video data-src="assets/video/kutu-acilisi.mp4" poster="assets/video/kutu-acilisi.jpg" muted loop playsinline preload="none"></video></div>
-    <div>
+    <div class="gift-txt">
       <span class="eyebrow rv">🎁 Hediye arıyorsan</span>
       <h2 class="h-l rv d1" style="margin-top:12px">Kutudan çıktığı an<br><span class="outline o-pink">oyuna hazır.</span></h2>
       <p class="lead rv d2" style="margin-top:18px">Pil yok, mürekkep yok, ek alışveriş yok. Kalemler ve etiketler kutunun içinde. Hediye paketi ve not kartı bizden.</p>
@@ -1071,9 +1202,9 @@ footer{padding:80px 0 40px;background:var(--paper)}
         <p>Çocukların hayal gücünü kâğıda döken küçük yazıcı. Tablete değil, kaleme uzanan eller için.</p>
         <div class="f-contact"><span>📞 0850 000 00 00</span><span>✉️ merhaba@ornek.com.tr</span><span>🕘 Hafta içi 09:00–18:00</span></div>
       </div>
-      <div><h5>Alışveriş</h5><ul><li><a href="#satin-al">OXPI Etiket Yazıcı</a></li><li><a href="#">Yedek etiket (yakında)</a></li><li><a href="#hediye">Hediye rehberi</a></li><li><a href="#">Okullar için</a></li></ul></div>
-      <div><h5>Yardım</h5><ul><li><a href="#">Kargo takibi</a></li><li><a href="#">İade ve değişim</a></li><li><a href="#">Garanti</a></li><li><a href="#sss">Sık sorulanlar</a></li><li><a href="#">İletişim</a></li></ul></div>
-      <div><h5>Yasal</h5><ul><li><a href="#">KVKK aydınlatma metni</a></li><li><a href="#">Mesafeli satış sözleşmesi</a></li><li><a href="#">Ön bilgilendirme formu</a></li><li><a href="#">Çerez politikası</a></li></ul></div>
+      <details class="fcol" open><summary><h5>Alışveriş</h5></summary><ul><li><a href="#satin-al">OXPI Etiket Yazıcı</a></li><li><a href="#">Yedek etiket (yakında)</a></li><li><a href="#hediye">Hediye rehberi</a></li><li><a href="#">Okullar için</a></li></ul></details>
+      <details class="fcol" open><summary><h5>Yardım</h5></summary><ul><li><a href="#">Kargo takibi</a></li><li><a href="#">İade ve değişim</a></li><li><a href="#">Garanti</a></li><li><a href="#sss">Sık sorulanlar</a></li><li><a href="#">İletişim</a></li></ul></details>
+      <details class="fcol" open><summary><h5>Yasal</h5></summary><ul><li><a href="#">KVKK aydınlatma metni</a></li><li><a href="#">Mesafeli satış sözleşmesi</a></li><li><a href="#">Ön bilgilendirme formu</a></li><li><a href="#">Çerez politikası</a></li></ul></details>
     </div>
     <div class="f-bottom">
       <div class="paylogos"><span>VISA</span><span>Mastercard</span><span>TROY</span><span>iyzico</span><span>Kapıda ödeme</span></div>
@@ -1083,7 +1214,11 @@ footer{padding:80px 0 40px;background:var(--paper)}
   </div>
 </footer>
 
-<div class="mbar" id="mbar"><div class="t">OXPI Etiket Yazıcı<b>2.499 TL</b></div><a href="#satin-al" class="btn btn-o btn-s">Sepete ekle</a></div>
+<div class="mbar" id="mbar" aria-label="Hızlı satın al">
+  <div class="mdots" role="group" aria-label="Renk seç"><button class="act" data-color="sari" style="--c:var(--yellow)" aria-label="Sarı"></button><button data-color="pembe" style="--c:var(--pink)" aria-label="Pembe"></button><button data-color="gri" style="--c:var(--grey)" aria-label="Gri"></button></div>
+  <div class="t"><span id="mbarName">Civciv Sarı</span><b>2.499 TL</b></div>
+  <button class="btn btn-o btn-s" id="mbarAdd">Sepete ekle</button>
+</div>
 <div class="toast" id="toast"></div>
 
 <script src="assets/cizimler.js"></script>
@@ -1095,11 +1230,13 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15,rootMargin:'0px 0px -40px 0px'});
 $$('.rv,.mark').forEach(el=>io.observe(el));
 
-/* ---------- header ---------- */
+/* ---------- header + sabit çubuk ---------- */
+let addVis=false;
+new IntersectionObserver(es=>{ addVis=es[0].isIntersecting; dispatchEvent(new Event('scroll')) }).observe(document.getElementById('addBtn'));
 addEventListener('scroll',()=>{
   $('#top').classList.toggle('sc',scrollY>10);
   const h=$('#hero').getBoundingClientRect().bottom;
-  $('#mbar').classList.toggle('show',h<0 && $('#satin-al').getBoundingClientRect().top>innerHeight*.6 || h<0 && $('#satin-al').getBoundingClientRect().bottom<0);
+  $('#mbar').classList.toggle('show',h<0 && !addVis);
 },{passive:true});
 
 /* ---------- videolar: görününce yükle & oynat ---------- */
@@ -1168,9 +1305,13 @@ DOODLES.forEach((o,i)=>{
 /* ---------- nasıl çalışır: adımlar videoyla senkron ---------- */
 const hw=$('#howVid'), steps=$$('.step'), segs=$$('#howSeg b');
 const B=[0,5.1,10.14,15.18,25.27];
+const cap=$('#howCap');
+function setCap(k){ const s=steps[k], q=s.querySelector('.quote-chip'); cap.innerHTML=`<b>${s.querySelector('.num').textContent} ${s.querySelector('h3').lastChild.textContent}</b>${q?q.textContent:s.querySelector('p').textContent}` }
+setCap(0);
 hw.addEventListener('timeupdate',()=>{
   const t=hw.currentTime; let k=3; for(let i=0;i<4;i++) if(t<B[i+1]){k=i;break}
   steps.forEach((s,i)=>s.classList.toggle('act',i===k));
+  if(cap.dataset.k!=k){ cap.dataset.k=k; setCap(k) }
   segs.forEach((b,i)=>b.style.transform=`scaleX(${i<k?1:i>k?0:(t-B[i])/(B[i+1]-B[i])})`);
 });
 steps.forEach(s=>s.addEventListener('click',()=>{ if(!hw.src) hw.src=hw.dataset.src; hw.currentTime=B[+s.dataset.s]+.05; hw.play() }));
@@ -1186,7 +1327,7 @@ let busy=false, current=null;
 $$('.chip').forEach(c=>c.addEventListener('click',async()=>{
   if(busy) return; busy=true; const art=c.dataset.art;
   $$('.chip').forEach(x=>{x.classList.toggle('act',x===c);x.disabled=true});
-  paper.className='paper'; talk.innerHTML='';
+  paper.className='paper'; talk.innerHTML=''; $('.demo-grid').classList.remove('painting');
   say('“'+REQ[art]+'”',true); scr('scrListen'); $('#scrLabel').textContent='dinliyor…';
   await wait(1300);
   say('Tamam, hemen çiziyorum!'); const di=$('#scrDraw img'); di.src=CIZIMLER[art];
@@ -1197,7 +1338,7 @@ $$('.chip').forEach(c=>c.addEventListener('click',async()=>{
   await wait(2800);
   paper.classList.add('fly'); $('#scrLabel').textContent='hazır'; scr('scrIdle');
   await loadArt(art);
-  say('Etiketin hazır! Şimdi boyama zamanı 🖍️');
+  say('Etiketin hazır! Şimdi boyama zamanı 🖍️'); $('.demo-grid').classList.add('painting');
   $$('.chip').forEach(x=>x.disabled=false); busy=false;
 }));
 
@@ -1256,9 +1397,18 @@ const NAMES={sari:'Sarıyı',pembe:'Pembeyi',gri:'Griyi'};
 function setColor(c){
   const b=$(`#colors [data-color="${c}"]`); $$('#colors button').forEach(x=>x.classList.toggle('act',x===b));
   $('#colorName').textContent=b.dataset.name; $('#addBtn').textContent=`${NAMES[c]} sepete ekle`;
+  $$('.mdots button').forEach(x=>x.classList.toggle('act',x.dataset.color===c)); $('#mbarName').textContent=b.dataset.name;
   const t=$('#thumbs [data-colorimg]'); t.dataset.img=`assets/img/g-${c}.jpg`; t.querySelector('img').src=t.dataset.img; showImg(t);
 }
-function showImg(t){ $$('#thumbs button').forEach(x=>x.classList.toggle('act',x===t)); const m=$('#mainImg'); m.style.opacity=0; setTimeout(()=>{m.src=t.dataset.img;m.onload=()=>m.style.opacity=1},150) }
+const thumbs=$$('#thumbs button'), gd=$('#gdots');
+thumbs.forEach(()=>gd.appendChild(document.createElement('i')));
+function showImg(t){ thumbs.forEach((x,j)=>{x.classList.toggle('act',x===t); gd.children[j].classList.toggle('act',x===t)}); const m=$('#mainImg'); m.style.opacity=0; setTimeout(()=>{m.src=t.dataset.img;m.onload=()=>m.style.opacity=1},150) }
+gd.children[0].classList.add('act');
+function stepImg(d){ const i=thumbs.findIndex(t=>t.classList.contains('act')); showImg(thumbs[(i+d+thumbs.length)%thumbs.length]) }
+(()=>{ const mi=$('.main-img'); let x0=null;
+  mi.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+  mi.addEventListener('touchend',e=>{ if(x0==null) return; const dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40) stepImg(dx<0?1:-1); x0=null });
+  mi.addEventListener('click',()=>{ if(matchMedia('(max-width:720px)').matches) stepImg(1) }); })();
 $$('#colors button').forEach(b=>b.addEventListener('click',()=>setColor(b.dataset.color)));
 $$('#thumbs button').forEach(b=>b.addEventListener('click',()=>showImg(b)));
 $$('.prod').forEach(p=>p.addEventListener('click',()=>{ setColor(p.dataset.color); $('#satin-al').scrollIntoView({behavior:'smooth'}) }));
@@ -1269,8 +1419,13 @@ function toast(t){ const el=$('#toast'); el.textContent=t; el.classList.add('on'
 function confetti(x,y){ if(reduce) return; const em=['⭐','🖍️','🦖','🚀','💛','🎨','✨','🐥'];
   for(let i=0;i<14;i++){ const s=document.createElement('span'); s.className='confetti'; s.textContent=em[i%em.length]; s.style.left=x+'px'; s.style.top=y+'px'; document.body.appendChild(s);
     const a=Math.random()*Math.PI*2, d=90+Math.random()*120; requestAnimationFrame(()=>{s.style.transform=`translate(${Math.cos(a)*d}px,${Math.sin(a)*d-60}px) rotate(${Math.random()*360}deg)`;s.style.opacity=0}); setTimeout(()=>s.remove(),1200) } }
-$('#addBtn').addEventListener('click',e=>{ cart++; const b=$('#cartCount'); b.textContent=cart; b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop');
-  toast(`${$('#colorName').textContent} OXPI sepete eklendi 🎉`); confetti(e.clientX,e.clientY) });
+$$('.mdots button').forEach(d=>d.addEventListener('click',()=>setColor(d.dataset.color)));
+function addToCart(e){ cart++; const b=$('#cartCount'); b.textContent=cart; b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop');
+  toast(`${$('#colorName').textContent} OXPI sepete eklendi 🎉`); confetti(e.clientX,e.clientY) }
+$('#addBtn').addEventListener('click',addToCart); $('#mbarAdd').addEventListener('click',addToCart);
+
+/* ---------- footer: mobilde kapalı açılır başlıklar ---------- */
+if(matchMedia('(max-width:720px)').matches) $$('.fcol').forEach(d=>d.removeAttribute('open'));
 </script>
 </body>
 </html>
