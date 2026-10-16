@@ -325,7 +325,8 @@ header.top.sc .nav{height:64px}
 .phone.p1{left:4%;top:0;transform:rotate(-4deg);z-index:2}
 .phone.p2{right:2%;bottom:0;transform:rotate(5deg)}
 .phone .snd{bottom:14px;right:14px;height:36px;font-size:13px;color:var(--ink)}
-.phone .cap{position:absolute;left:14px;right:14px;top:16px;background:rgba(255,255,255,.95);color:var(--ink);border-radius:14px;padding:8px 12px;font:700 14px/1.25 var(--f-ui);border:2px solid var(--ink)}
+.phone .cap{position:absolute;left:14px;right:14px;top:16px;z-index:2;background:rgba(255,255,255,.95);color:var(--ink);border-radius:14px;padding:8px 12px;font:700 14px/1.25 var(--f-ui);border:2px solid var(--ink)}
+.phone .cap small{display:block;font:800 10.5px/1.2 var(--f-ui);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
 
 /* ================= HER ÇIKTI FARKLI ================= */
 .board{padding:80px 0 90px;background-color:var(--blue);color:#fff;position:relative;overflow:hidden}
@@ -712,12 +713,15 @@ footer{padding:80px 0 40px;background:var(--paper)}
   .f-bottom{margin-top:24px}
 
   /* sıkılaştırmalar */
+  .busy-grid{grid-template-columns:minmax(0,1fr)}
+  .busy-grid>div{min-width:0}
   .moments{flex-wrap:nowrap;overflow-x:auto;margin:22px -16px 0;padding:0 16px 6px;scrollbar-width:none}
   .moments::-webkit-scrollbar{display:none}
   .moments span{flex:none}
   .phones{height:400px}
   .phone{width:188px}
   .phone .cap{font-size:12px;padding:6px 9px;top:10px;left:10px;right:10px}
+  .phone .cap small{font-size:9px}
   .board .vcard{width:60%}
   .score{padding:14px 18px;gap:14px}
   .score b{font-size:46px}
@@ -965,14 +969,14 @@ footer{padding:80px 0 40px;background:var(--paper)}
 <section class="busy tear-tb" id="aksam">
   <div class="wrap busy-grid">
     <div>
-      <span class="eyebrow rv" style="color:var(--yellow)">🍲 Akşam 19:30</span>
-      <h2 class="h-l rv d1" style="margin-top:12px">Sen yemeği hazırlarken o da <em>kendi dünyasını</em> çiziyor.</h2>
-      <p class="lead rv d2">Suçluluk yok, “bir bölüm daha” pazarlığı yok. Mutfaktan sadece kalemlerin sesi ve arada bir “Anne bak!” geliyor.</p>
-      <div class="moments rv d3"><span>☀️ Kahvaltıdan sonra</span><span>🍲 Sen yemek yaparken</span><span>📞 İş görüşmesinde</span><span>🌙 Uyku öncesi</span></div>
+      <span class="eyebrow rv" style="color:var(--yellow)">🏠 Evde sıradan bir akşam</span>
+      <h2 class="h-l rv d1" style="margin-top:12px">Sen işlerini hallederken o da <em>kendi işinde.</em></h2>
+      <p class="lead rv d2">Sen yemeği yaparken o roket çizdiriyor. Sen bilgisayar başındayken o ödevindeki “7 artı 8”i soruyor. Ne tablet pazarlığı var ne “bir bölüm daha”. Arada bir sadece “Bak ne yaptım!” geliyor.</p>
+      <div class="moments rv d3"><span>🍳 Yemek yaparken</span><span>💻 Bilgisayar başındayken</span><span>📞 Telefondayken</span><span>🌙 Uyku öncesi</span></div>
     </div>
     <div class="phones rv d2">
-      <div class="phone p1"><span class="cap">🧒 “Bana bir roket çizer misin?”</span><video id="b1" data-src="assets/video/ebeveyn-mesgul-boyama.mp4" poster="assets/video/ebeveyn-mesgul-boyama.jpg" muted loop playsinline preload="none"></video><button class="snd" data-for="b1"><span class="off">🔇 Dinle</span><span class="on">🔊 Kapat</span></button></div>
-      <div class="phone p2"><span class="cap">👧 “7 artı 8 kaç eder?”</span><video id="b2" data-src="assets/video/ebeveyn-mesgul-matematik.mp4" poster="assets/video/ebeveyn-mesgul-matematik.jpg" muted loop playsinline preload="none"></video><button class="snd" data-for="b2"><span class="off">🔇 Dinle</span><span class="on">🔊 Kapat</span></button></div>
+      <div class="phone p1"><span class="cap"><small>🍳 Arkada: akşam yemeği</small>🧒 “Bana bir roket çizer misin?”</span><video id="b1" data-src="assets/video/ebeveyn-mesgul-boyama.mp4" poster="assets/video/ebeveyn-mesgul-boyama.jpg" muted loop playsinline preload="none"></video><button class="snd" data-for="b1"><span class="off">🔇 Dinle</span><span class="on">🔊 Kapat</span></button></div>
+      <div class="phone p2"><span class="cap"><small>💻 Arkada: annesi çalışıyor</small>👧 “7 artı 8 kaç eder?”</span><video id="b2" data-src="assets/video/ebeveyn-mesgul-matematik.mp4" poster="assets/video/ebeveyn-mesgul-matematik.jpg" muted loop playsinline preload="none"></video><button class="snd" data-for="b2"><span class="off">🔇 Dinle</span><span class="on">🔊 Kapat</span></button></div>
     </div>
   </div>
 </section>
