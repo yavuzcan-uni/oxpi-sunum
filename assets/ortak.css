@@ -730,3 +730,8 @@ footer{padding:80px 0 40px;background:var(--paper)}
 }
 .menu a{white-space:nowrap}
 @media (min-width:1101px) and (max-width:1380px){.menu{gap:0}.menu a{padding:9px 9px;font-size:15px}.menu a span{display:none}.menu a.prod-link span{display:inline}}
+
+/* ---------- alomi logosu: "o" üstünde kedi kulakları (nokta değil, "ö" gibi okunmasın) ---------- */
+.logo .o i{top:-.13em;width:.3em;height:.3em;border:0;border-radius:0}
+.logo .o i:first-child{left:-.02em;background:var(--yellow);clip-path:polygon(0 0,100% 62%,38% 100%)}
+.logo .o i:last-child{right:-.02em;background:var(--pink-d);clip-path:polygon(100% 0,0 62%,62% 100%)}
