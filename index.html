@@ -549,6 +549,14 @@ $$('.snd').forEach(b=>b.addEventListener('click',e=>{
   if(turnOn){ if(v.dataset.src&&!v.src) v.src=v.dataset.src; v.muted=false; v.currentTime=0; v.play(); b.classList.add('is-on') }
 }));
 
+/* ---------- videoya dokununca ses aç/kapat (kaydırırken değil, gerçek dokunuşta) ---------- */
+$$('.snd').forEach(b=>{ const v=document.getElementById(b.dataset.for); if(!v||v.controls) return;
+  const box=v.parentElement; let x0=null,y0=0,t0=0; box.style.cursor='pointer';
+  box.addEventListener('pointerdown',e=>{ x0=e.clientX; y0=e.clientY; t0=Date.now() },{passive:true});
+  box.addEventListener('click',e=>{ if(e.target.closest('button,a')) return;
+    if(x0!=null && (Math.hypot(e.clientX-x0,e.clientY-y0)>10 || Date.now()-t0>600)) return;
+    b.click() }); });
+
 /* ---------- hero: video ile senkron balonlar ---------- */
 const hv=$('#heroVid'), bubbles=$$('#heroStage .bubble'), hp=$$('#heroProg b');
 const SEG=20.1667/4;
