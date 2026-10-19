@@ -642,7 +642,7 @@ footer{padding:80px 0 40px;background:var(--paper)}
   .buy-grid{display:flex;flex-direction:column;align-items:stretch;gap:0}
   .info{display:contents}
   .info .rate{order:1}.info h2{order:2}.info .sub{order:3}.price{order:4}.pay{order:5}
-  .gal{order:6;margin-top:16px;position:static}
+  .gal{order:0;margin-bottom:16px;position:static}
   .o-col{order:7}.colors{order:8}.buy-ctas{order:9}.gift-line{order:10}.o-box{order:11}.box{order:12}.assure{order:13}
   .thumbs{display:none}
   .main-img{aspect-ratio:4/3;touch-action:pan-y}
