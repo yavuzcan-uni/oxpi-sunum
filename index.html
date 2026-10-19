@@ -14,7 +14,7 @@
   Müşteri yorumları, isimler, portreler, puan (4,9) ve değerlendirme sayısı (1.248) ÖRNEK içeriktir.
   Fiyat (2.499 TL) yer tutucudur. Marka adı Alomi (17 Ekim 2026); tescil başvurusu öncesi marka vekili görüşü alınmalı. Yayına almadan önce gerçek verilerle değiştirilmelidir.
 -->
-<link rel="stylesheet" href="assets/ortak.css?v=5">
+<link rel="stylesheet" href="assets/ortak.css?v=6">
 </head>
 <body>
 
@@ -150,6 +150,10 @@
           <button class="chip" data-art="prenses">👑 Prenses</button>
           <button class="chip" data-art="araba">🏎️ Yarış arabası</button>
           <button class="chip" data-art="kopek">🐶 Köpek</button>
+        </div>
+        <div class="pick-hint" aria-hidden="true">
+          <svg viewBox="0 0 120 92" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path class="a" pathLength="1" d="M110 84C84 90 56 80 54 60C52 44 74 38 75 53C76 68 44 72 32 52C24 38 25 24 29 9"/><path class="h" pathLength="1" d="M18 19L29 7L39 18"/></svg>
+          <span>Önce birini seç!<small>kaydır, daha çok var →</small></span>
         </div>
         <div class="talk" id="talk" aria-live="polite"></div>
         </div>
@@ -632,6 +636,15 @@ $$('.chip').forEach(c=>c.addEventListener('click',async()=>{
   say('Etiketin hazır! Şimdi boyama zamanı 🖍️'); $('.demo-grid').classList.add('painting');
   $$('.chip').forEach(x=>x.disabled=false); busy=false;
 }));
+
+/* mobil: istekler yana kayar; sağ kenar solgunluğu sona gelince kalkar, ilk görünüşte bir kez "kayıp geri gelir" */
+(()=>{ const ch=$('#chips');
+  const edge=()=>ch.classList.toggle('end',ch.scrollLeft+ch.clientWidth>=ch.scrollWidth-4);
+  ch.addEventListener('scroll',edge,{passive:true}); addEventListener('resize',edge); edge();
+  if(reduce) return;
+  const n=new IntersectionObserver(es=>{ if(!es[0].isIntersecting||ch.scrollWidth<=ch.clientWidth+4) return; n.disconnect();
+    setTimeout(()=>{ ch.scrollTo({left:90,behavior:'smooth'}); setTimeout(()=>ch.scrollTo({left:0,behavior:'smooth'}),650) },1700) },{threshold:.6});
+  n.observe(ch); })();
 
 /* boyama motoru: bölge etiketleme + tek tıkla doldurma */
 const W=640,H=640; let ink, labels, fills, tex;
