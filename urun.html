@@ -139,6 +139,8 @@
 .fs i{font-style:normal;width:46px;height:46px;border-radius:14px;border:2px solid var(--ink);display:grid;place-items:center;font-size:22px;background:var(--c)}
 .fs h3{font:800 23px/1.05 var(--f-display);margin:14px 0 4px}
 .fs p{color:var(--muted);font-size:15.5px}
+.flow-h{margin-top:12px;font-size:clamp(34px,3.3vw,50px);line-height:1.04;text-wrap:balance}
+.flow-h .nw,.flow-h .mark{white-space:nowrap}
 .flow-note{margin-top:22px;font:700 24px/1.15 var(--f-hand);color:var(--muted)}
 
 /* neler yapabilir */
@@ -383,7 +385,8 @@
   .sec-head{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:24px}
   .flow{grid-template-columns:1fr;gap:26px}
   .flow .vcard{width:62%;margin:0 auto;order:2}
-  .flow-steps{grid-template-columns:1fr 1fr;gap:10px}
+  .flow-steps{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+  .flow-h{font-size:clamp(28px,8.4vw,36px)}
   .fs{padding:14px}
   .fs h3{font-size:19px}
   .fs p{font-size:13.5px}
@@ -554,8 +557,8 @@
   <div class="wrap flow">
     <div class="vcard rv"><video id="fv" data-src="assets/video/hero-akis.mp4" poster="assets/video/hero-akis.jpg" muted loop playsinline preload="none"></video><button class="snd" data-for="fv"><span class="off">🔇 Sesi aç</span><span class="on">🔊 Sesi kapat</span></button></div>
     <div>
-      <span class="eyebrow rv">🖍️ 20 saniyede Alomi</span>
-      <h2 class="h-l rv d1" style="margin-top:12px">Kurulumu 2 dakikada biter,<br><span class="mark">dostluğu bitmez.</span></h2>
+      <span class="eyebrow rv">🖍️ 1 dakikada Alomi</span>
+      <h2 class="h-l flow-h rv d1">Kurulumu <span class="nw">1 dakikada</span> biter,<br><span class="mark">dostluğu bitmez.</span></h2>
       <div class="flow-steps">
         <div class="fs rv d1"><i style="--c:var(--yellow)">🎙️</i><h3>1 · Söyle</h3><p>AI düğmesine bas, ne istediğini anlat.</p></div>
         <div class="fs rv d2"><i style="--c:var(--pink)">✏️</i><h3>2 · Çizsin</h3><p>Çizim 2,8" ekranda birkaç saniyede belirir.</p></div>
