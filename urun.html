@@ -44,6 +44,7 @@
 /* ödeme rozetleri: fotoğrafın sağ üstü */
 .pg-pay{position:absolute;right:16px;top:16px;z-index:2;display:flex;flex-direction:column;align-items:flex-end;gap:7px;pointer-events:none}
 .pg-pay span{display:flex;align-items:center;gap:7px;background:#fff;border:2px solid var(--ink);border-radius:12px;padding:5px 10px 5px 6px;box-shadow:3px 3px 0 var(--ink)}
+.pg-main:not(.first) .pg-pay{display:none}
 .pg-pay span.g{transform:rotate(-2deg)}
 .pg-pay span:nth-child(3){transform:rotate(2deg)}
 .pg-pay svg{width:26px;height:26px;flex:none;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -368,7 +369,7 @@
   .pg-dots i{width:6px;height:6px;border-radius:3px;background:#D9D2C2;transition:all .25s}
   .pg-dots i.act{width:18px;background:var(--ink)}
   .pg-swipe .pg-badges{left:24px;top:auto;bottom:12px}
-  .pg-swipe .pg-pay{right:24px;top:14px;gap:6px}
+  .pg-track .pg-pay{right:24px;top:14px;gap:6px}
   .pg-pay span{padding:4px 8px 4px 5px;border-radius:10px;box-shadow:2px 2px 0 var(--ink)}
   .pg-pay svg{width:22px;height:22px}
   .pg-pay b{font-size:12.5px}
@@ -466,17 +467,16 @@
       <!-- galeri -->
       <div class="pg" id="gallery">
         <div class="pg-thumbs" id="pgThumbs" role="tablist" aria-label="Ürün görselleri"></div>
-        <div class="pg-main" id="pgMain">
+        <div class="pg-main first" id="pgMain">
           <div class="pg-badges"><span class="y">⭐ 4,9 · 1.248 aile</span><span>🧻 3 rulo etiket hediye</span></div>
           <img id="pgImg" src="assets/img/g-sari.jpg" alt="Alomi Yapay Zekâlı Çocuk Yazıcısı, sarı">
           <video id="pgVid" playsinline controls preload="none" poster="assets/video/hero-akis.jpg"></video>
           <span class="pg-cap" id="pgCap">Sarı</span>
-          <div class="pg-pay"><span class="g"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 3.5l9 3.4v6.6c0 5.6-3.8 9.6-9 11.2-5.2-1.6-9-5.6-9-11.2V6.9z" fill="#3DBE6B"/><path d="M9.8 14.2l3 3 5.6-6"/></svg><b>2 yıl<small>garanti</small></b></span><span><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="6.5" width="22" height="15" rx="3.5" fill="#FFC83D"/><path d="M3 11.5h22" stroke-width="3"/><path d="M7.5 17h5"/><rect x="3" y="6.5" width="22" height="15" rx="3.5"/></svg><b>3 × 833 TL<small>peşin fiyatına</small></b></span><span><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M4 24.5h20"/><rect x="7" y="3.5" width="14" height="21" rx="2" fill="#FF8A3D"/><path d="M10 7.5h8v13" fill="none" stroke-opacity=".35"/><circle cx="17.2" cy="14.5" r="1.3" fill="#16161D" stroke="none"/></svg><b>Kapıda<small>ödeme</small></b></span></div>
+          <div class="pg-pay"><span class="g"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 3.5l9 3.4v6.6c0 5.6-3.8 9.6-9 11.2-5.2-1.6-9-5.6-9-11.2V6.9z" fill="#3DBE6B"/><path d="M9.8 14.2l3 3 5.6-6"/></svg><b>2 yıl<small>garanti</small></b></span><span><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="6.5" width="22" height="15" rx="3.5" fill="#FFC83D"/><path d="M3 11.5h22" stroke-width="3"/><path d="M7.5 17h5"/><rect x="3" y="6.5" width="22" height="15" rx="3.5"/></svg><b>3 taksit</b></span><span><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M4 24.5h20"/><rect x="7" y="3.5" width="14" height="21" rx="2" fill="#FF8A3D"/><path d="M10 7.5h8v13" fill="none" stroke-opacity=".35"/><circle cx="17.2" cy="14.5" r="1.3" fill="#16161D" stroke="none"/></svg><b>Kapıda<small>ödeme</small></b></span></div>
         </div>
         <div class="pg-swipe">
           <div class="pg-track" id="pgTrack"></div>
           <div class="pg-badges"><span class="y">⭐ 4,9 · 1.248 aile</span></div>
-          <div class="pg-pay"><span class="g"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 3.5l9 3.4v6.6c0 5.6-3.8 9.6-9 11.2-5.2-1.6-9-5.6-9-11.2V6.9z" fill="#3DBE6B"/><path d="M9.8 14.2l3 3 5.6-6"/></svg><b>2 yıl<small>garanti</small></b></span><span><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="6.5" width="22" height="15" rx="3.5" fill="#FFC83D"/><path d="M3 11.5h22" stroke-width="3"/><path d="M7.5 17h5"/><rect x="3" y="6.5" width="22" height="15" rx="3.5"/></svg><b>3 × 833 TL<small>peşin fiyatına</small></b></span><span><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M4 24.5h20"/><rect x="7" y="3.5" width="14" height="21" rx="2" fill="#FF8A3D"/><path d="M10 7.5h8v13" fill="none" stroke-opacity=".35"/><circle cx="17.2" cy="14.5" r="1.3" fill="#16161D" stroke="none"/></svg><b>Kapıda<small>ödeme</small></b></span></div>
           <span class="pg-count" id="pgCount">1 / 9</span>
           <div class="pg-dots" id="pgDots"></div>
         </div>
@@ -900,13 +900,15 @@ let gi=0;
 function buildGallery(){
   const items=G(), th=$('#pgThumbs'), tr=$('#pgTrack'), dots=$('#pgDots');
   th.innerHTML=items.map((x,i)=>`<button role="tab" class="${i===gi?'act ':''}${x.t==='vid'?'play':''}${x.ugc?' ugc':''}" data-i="${i}" aria-label="${x.cap}"><img src="${x.t==='vid'?x.poster:x.src}" alt=""></button>`).join('');
-  tr.innerHTML=items.map(x=>x.t==='vid'?`<div><video src="${x.src}" poster="${x.poster}" playsinline controls preload="none"></video></div>`:`<div><img src="${x.src}" alt="${x.cap}" loading="lazy"></div>`).join('');
+  const pay=$('#pgMain .pg-pay').outerHTML; // rozetler ana fotoğrafın içinde: kaydırınca onunla birlikte kayar
+  tr.innerHTML=items.map((x,i)=>x.t==='vid'?`<div><video src="${x.src}" poster="${x.poster}" playsinline controls preload="none"></video></div>`:`<div><img src="${x.src}" alt="${x.cap}" loading="lazy">${i===0?pay:''}</div>`).join('');
   dots.innerHTML=items.map((_,i)=>`<i class="${i===0?'act':''}"></i>`).join('');
   $$('button',th).forEach(b=>b.addEventListener('click',()=>show(+b.dataset.i)));
 }
 function show(i){
   const items=G(); gi=(i+items.length)%items.length; const x=items[gi], m=$('#pgMain'), img=$('#pgImg'), vid=$('#pgVid');
   $$('#pgThumbs button').forEach((b,j)=>b.classList.toggle('act',j===gi));
+  m.classList.toggle('first',gi===0);
   m.classList.remove('zoom');
   if(x.t==='vid'){ m.classList.add('is-video'); if(!vid.src) vid.src=x.src; vid.play().catch(()=>{}) }
   else { m.classList.remove('is-video'); vid.pause(); img.style.opacity=0; setTimeout(()=>{img.src=x.src; img.alt=x.cap; img.onload=()=>img.style.opacity=1},120) }
