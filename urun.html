@@ -964,7 +964,7 @@ shipInfo(); setInterval(shipInfo,30000);
 const gb=$('#giftbox'), gc=$('#giftChk');
 gc.addEventListener('change',()=>gb.classList.toggle('on',gc.checked));
 $('#giftNote').addEventListener('input',e=>$('#noteLen').textContent=e.target.value.length);
-function giftOn(){ gc.checked=true; gb.classList.add('on'); $('#bb').scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>$('#giftNote').focus({preventScroll:true}),700) }
+function giftOn(){ gc.checked=true; gb.classList.add('on'); gb.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>$('#giftNote').focus({preventScroll:true}),700) }
 $('#giftGo').onclick=giftOn; $$('#giftChips button').forEach(b=>b.onclick=giftOn);
 
 /* ---------- sepet ---------- */
